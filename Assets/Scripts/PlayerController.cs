@@ -1,3 +1,4 @@
+using Assets.Scripts;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Splines;
@@ -6,11 +7,13 @@ public class PlayerController : MonoBehaviour
 {
     Rigidbody2D rb;
     Animator animator;
+    TouchingDirection touchingDirection;
 
     Vector2 moveInput;
 
-    float walkSpeed = 4f;
-    float runSpeed = 7f;
+    [SerializeField] float walkSpeed = 4f;
+    [SerializeField] float runSpeed = 7f;
+    [SerializeField] float jumpForce = 7f;
 
     private bool _isMoving = false;
     public bool IsMoving
@@ -20,7 +23,7 @@ public class PlayerController : MonoBehaviour
         {
             if (_isMoving != value)
             {
-                animator.SetBool("isMoving", value);
+                animator.SetBool(AnimationStrings.IsMoving, value);
             }
             _isMoving = value;
         }
@@ -34,7 +37,7 @@ public class PlayerController : MonoBehaviour
         {
             if (_isRunning != value)
             {
-                animator.SetBool("isRunning", value);
+                animator.SetBool(AnimationStrings.IsRunning, value);
             }
             _isRunning = value;
         }
@@ -60,6 +63,7 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        touchingDirection = GetComponent<TouchingDirection>();
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created  
@@ -76,7 +80,6 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //rb.linearVelocity = new Vector2(moveInput.x * speed, rb.linearVelocity.y);
         if (_isRunning)
         {
             rb.linearVelocity = new Vector2(moveInput.x * runSpeed, rb.linearVelocity.y);
@@ -94,7 +97,15 @@ public class PlayerController : MonoBehaviour
         SetFacingDirection(moveInput);
     }
 
-    public void onRunning(InputAction.CallbackContext context)
+    public void OnJump(InputAction.CallbackContext context)
+    {
+        if (context.started && touchingDirection.IsGround)
+        {
+            animator.SetTrigger(AnimationStrings.Jump);
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+        }
+    }
+    public void OnRunning(InputAction.CallbackContext context)
     {
         if (context.started)
         {
@@ -103,6 +114,14 @@ public class PlayerController : MonoBehaviour
         else if (context.canceled)
         {
             IsRunning = false;
+        }
+    }
+
+    public void OnAttack(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            animator.SetTrigger(AnimationStrings.Attack);
         }
     }
 
