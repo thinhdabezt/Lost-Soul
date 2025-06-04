@@ -50,7 +50,7 @@
 - [Assorted Pixel Icons](https://quintino-pixels.itch.io/assorted-icons)
 
 ### Bosses
-- [Forest Bosses Sprite Sheet]([https://www.deviantart.com/craftpix/art/Free-Forest-Bosses-Pixel-Art-Sprite-Sheet-Pack-1196414962](https://craftpix.net/freebies/free-forest-bosses-pixel-art-sprite-sheet-pack/)
+- [Forest Bosses Sprite Sheet](https://craftpix.net/freebies/free-forest-bosses-pixel-art-sprite-sheet-pack/)
 
 ---
 
@@ -68,63 +68,10 @@
 4. Click **Open** in Unity Hub.
 5. Press `Play` in the Unity Editor to run the game.
 
-## 📁 Project Structure
-
-/Assets
-/Art
-/Environment
-/Characters
-/Enemies
-/UI
-/Scripts
-/Prefabs
-/Scenes
-/Animations
-/Audio
-/ProjectSettings
-/Packages
-
-yaml
-Copy
-Edit
-
----
-
 ## 🚀 Features
 
 - Fast-paced melee combat with combos
 - Hand-animated pixel art enemies and bosses
 - Parallax scrolling forest backgrounds
-- Secret paths and hidden pickups
 - Modular enemy AI
 - Retro-style UI with pixel icons
-
----
-
-## 📃 License & Attribution
-
-All external assets are used under their respective licenses (mostly free for commercial use with attribution).  
-Please review each asset’s page for specific terms.
-
-Game code and design by: **[Your Name / Studio Name]**  
-Special thanks to all the talented artists credited above!
-
----
-
-## 🛠️ Roadmap
-
-- [ ] Controller Support
-- [ ] More Boss Fights
-- [ ] Upgrade/Skill Tree
-- [ ] Sound Effects & Music
-- [ ] Publishing on Itch.io & Steam
-
----
-
-## 📬 Contact
-
-📧 Email: [your.email@example.com]  
-🌐 Portfolio: [yourwebsite.dev]  
-🕹️ Itch.io: [your-itch-page](https://yourname.itch.io)
-
----
