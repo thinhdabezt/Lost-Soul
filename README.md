@@ -1,7 +1,6 @@
-# Lost-Soul
-# 🌲 Verdant Vagabond
+# 🌲 Lost-Soul
 
-**Verdant Vagabond** is a 2D side-scrolling hack-and-slash game built in **Unity**. You play as a stranded sci-fi warrior in a hostile, overgrown forest. Use your blade, reflexes, and quick thinking to survive waves of monsters, platforming challenges, and epic boss battles.
+**Lost-Soul** is a 2D side-scrolling hack-and-slash game built in **Unity**. You play as a stranded sci-fi warrior in a hostile, overgrown forest. Use your blade, reflexes, and quick thinking to survive waves of monsters, platforming challenges, and epic boss battles.
 
 ---
 
@@ -27,7 +26,7 @@
 | Move Left       | `A`         |
 | Move Right      | `D`         |
 | Jump            | `Spacebar`  |
-| Attack          | `Ledt Mouse`|
+| Attack          | `Left Mouse`|
 | Pause/Menu      | `Esc`       |
 
 *You can remap keys in the settings (coming soon).*
