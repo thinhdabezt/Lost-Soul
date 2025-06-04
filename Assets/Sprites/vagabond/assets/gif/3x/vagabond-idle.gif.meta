@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      vagabond-idle_0: 8873068960196797349
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      preview-vagabond-jump-attack_0: 8218648843543939903
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

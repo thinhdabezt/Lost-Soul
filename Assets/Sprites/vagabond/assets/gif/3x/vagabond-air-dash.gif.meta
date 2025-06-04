@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      vagabond-air-dash_0: -2621830480277460255
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

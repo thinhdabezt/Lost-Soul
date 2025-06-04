@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      preview-vagabond-knockback_0: -3037234244884301789
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
