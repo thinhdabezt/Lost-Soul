@@ -43,8 +43,8 @@
 - [Sci-Fi Vagabond Player](https://pixramen.itch.io/2d-action-platformer-sci-fi-vagabond)
 - [Forest Monsters](https://monopixelart.itch.io/forest-monsters-pixel-art)
 - [Flying Enemies](https://monopixelart.itch.io/flying-enemies)
-- [Fantasy Creatures]([https://monopixelart.itch.io/flying-enemies](https://luizmelo.itch.io/monsters-creatures-fantasy)
-- 
+- [Fantasy Creatures](https://luizmelo.itch.io/monsters-creatures-fantasy)
+
 ### UI
 - [Assorted Pixel Icons](https://quintino-pixels.itch.io/assorted-icons)
 
