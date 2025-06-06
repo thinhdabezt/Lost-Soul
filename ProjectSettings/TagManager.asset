@@ -12,7 +12,7 @@ TagManager:
   - Water
   - UI
   - Tilemap
-  - 
+  - TilemapNoCollision
   - 
   - 
   - 
@@ -40,6 +40,9 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Monster
+    uniqueID: 3978241723
     locked: 0
   - name: Player
     uniqueID: 4287101047
