@@ -91,8 +91,5 @@ public class TouchingDirection : MonoBehaviour
         IsGround = capsuleCollider2d.Cast(Vector2.down, contactFilter, groundHits, groundCheckDistance) > 0;
         IsOnWall = capsuleCollider2d.Cast(wallCheckDirection, contactFilter, wallHits, wallCheckDistance) > 0;
         IsOnCeiling = capsuleCollider2d.Cast(Vector2.up, contactFilter, ceilingHits, ceilingCheckDistance) > 0;
-
-        Debug.Log($"IsGround: {IsGround}, IsOnWall: {IsOnWall}, IsOnCeiling: {IsOnCeiling}");
-        Debug.Log(wallCheckDirection);
     }
 }
