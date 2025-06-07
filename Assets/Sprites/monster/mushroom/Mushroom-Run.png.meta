@@ -137,7 +137,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 289df0716f382294ea3f0f56694a9123
-      internalID: -1011914692
+      internalID: 3384204939538765328
       vertices: []
       indices: 
       edges: []
@@ -159,7 +159,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 6ae9aff23e749a5409afb479c687dafb
-      internalID: -496975863
+      internalID: -4325078450221725429
       vertices: []
       indices: 
       edges: []
@@ -181,7 +181,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 223490f3e97411a479aaf675351881a5
-      internalID: 1747590580
+      internalID: -645255179668140732
       vertices: []
       indices: 
       edges: []
@@ -203,7 +203,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 076f48367c47c7741bd1dc1115ffa21b
-      internalID: -1994946397
+      internalID: -952395438973167047
       vertices: []
       indices: 
       edges: []
@@ -225,7 +225,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 3efbb594174c4d94b8dde3b3ee6cfcc6
-      internalID: 400934815
+      internalID: 322393085181601614
       vertices: []
       indices: 
       edges: []
@@ -247,7 +247,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 4023237a31d8c42469b9c8aec42db330
-      internalID: -1170958395
+      internalID: 5847104798459840425
       vertices: []
       indices: 
       edges: []
@@ -269,7 +269,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 84bf2b494ffd8bb4f9c09d0618293993
-      internalID: -202868586
+      internalID: 1594397803641435042
       vertices: []
       indices: 
       edges: []
@@ -291,7 +291,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: aab159fd79975384cb8586405ab7f320
-      internalID: 1193707532
+      internalID: 2396631267008995893
       vertices: []
       indices: 
       edges: []
@@ -310,14 +310,14 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Mushroom-Run_0: -1011914692
-      Mushroom-Run_1: -496975863
-      Mushroom-Run_2: 1747590580
-      Mushroom-Run_3: -1994946397
-      Mushroom-Run_4: 400934815
-      Mushroom-Run_5: -1170958395
-      Mushroom-Run_6: -202868586
-      Mushroom-Run_7: 1193707532
+      Mushroom-Run_0: 3384204939538765328
+      Mushroom-Run_1: -4325078450221725429
+      Mushroom-Run_2: -645255179668140732
+      Mushroom-Run_3: -952395438973167047
+      Mushroom-Run_4: 322393085181601614
+      Mushroom-Run_5: 5847104798459840425
+      Mushroom-Run_6: 1594397803641435042
+      Mushroom-Run_7: 2396631267008995893
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
