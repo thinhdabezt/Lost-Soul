@@ -158,7 +158,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 064ef008b3a3aa14c851a71bff2581eb
-      internalID: 1334343560
+      internalID: 4880523274685937445
       vertices: []
       indices: 
       edges: []
@@ -180,7 +180,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 8edfcc7f2327e7e44aa23c1cf0f5c168
-      internalID: -2066595311
+      internalID: 6497299558051612606
       vertices: []
       indices: 
       edges: []
@@ -202,7 +202,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: af57e6061c4dcea44873194fd2168110
-      internalID: -1390638822
+      internalID: 1640459993709404721
       vertices: []
       indices: 
       edges: []
@@ -224,7 +224,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 16684702c7b9564438fe0c1523f121ea
-      internalID: -1141682828
+      internalID: 1620020546130643878
       vertices: []
       indices: 
       edges: []
@@ -246,7 +246,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 5bae18e82c716004ebd4090f6c31698a
-      internalID: -523209581
+      internalID: -2032438291353025295
       vertices: []
       indices: 
       edges: []
@@ -268,7 +268,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 6a111ec602a86cf4f82875025063d8f1
-      internalID: 1365399456
+      internalID: -4042034173729339270
       vertices: []
       indices: 
       edges: []
@@ -290,7 +290,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 67cc9a4ccc2c21c4a9b57d5742098dd0
-      internalID: 460879604
+      internalID: -8632210637703985939
       vertices: []
       indices: 
       edges: []
@@ -312,7 +312,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 072fdfe330cca2a42919d3f9b2e510cf
-      internalID: -1122003222
+      internalID: 4451060922991824286
       vertices: []
       indices: 
       edges: []
@@ -334,7 +334,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 4461db220dbca5e47bd075b53d10e963
-      internalID: 384617172
+      internalID: 6405643120833249975
       vertices: []
       indices: 
       edges: []
@@ -356,7 +356,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 29734919992b4d74abafad028d429b79
-      internalID: -672972079
+      internalID: 1878989539424652003
       vertices: []
       indices: 
       edges: []
@@ -378,7 +378,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: b14b71f8e26694641842ce30ad30a465
-      internalID: -352756010
+      internalID: 8520895683359543962
       vertices: []
       indices: 
       edges: []
@@ -400,7 +400,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 8bf2bb6ccd9b4fd42af6de141f20af85
-      internalID: -1454150929
+      internalID: -6670348678217829923
       vertices: []
       indices: 
       edges: []
@@ -422,7 +422,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 958bf392247a9b14cb5e4e933ae78569
-      internalID: 1634957912
+      internalID: -1953191800096732447
       vertices: []
       indices: 
       edges: []
@@ -444,7 +444,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 60211835df1e9464da50c64a6a691f5d
-      internalID: 1649712468
+      internalID: -5784191093614676159
       vertices: []
       indices: 
       edges: []
@@ -466,7 +466,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 7ff9beeb1ee539543b58d6d3045cfb60
-      internalID: 986915293
+      internalID: -9147222279066183815
       vertices: []
       indices: 
       edges: []
@@ -485,21 +485,21 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Mushroom-Die_0: 1334343560
-      Mushroom-Die_1: -2066595311
-      Mushroom-Die_10: -352756010
-      Mushroom-Die_11: -1454150929
-      Mushroom-Die_12: 1634957912
-      Mushroom-Die_13: 1649712468
-      Mushroom-Die_14: 986915293
-      Mushroom-Die_2: -1390638822
-      Mushroom-Die_3: -1141682828
-      Mushroom-Die_4: -523209581
-      Mushroom-Die_5: 1365399456
-      Mushroom-Die_6: 460879604
-      Mushroom-Die_7: -1122003222
-      Mushroom-Die_8: 384617172
-      Mushroom-Die_9: -672972079
+      Mushroom-Die_0: 4880523274685937445
+      Mushroom-Die_1: 6497299558051612606
+      Mushroom-Die_10: 8520895683359543962
+      Mushroom-Die_11: -6670348678217829923
+      Mushroom-Die_12: -1953191800096732447
+      Mushroom-Die_13: -5784191093614676159
+      Mushroom-Die_14: -9147222279066183815
+      Mushroom-Die_2: 1640459993709404721
+      Mushroom-Die_3: 1620020546130643878
+      Mushroom-Die_4: -2032438291353025295
+      Mushroom-Die_5: -4042034173729339270
+      Mushroom-Die_6: -8632210637703985939
+      Mushroom-Die_7: 4451060922991824286
+      Mushroom-Die_8: 6405643120833249975
+      Mushroom-Die_9: 1878989539424652003
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
