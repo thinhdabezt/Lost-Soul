@@ -6,6 +6,14 @@ public class Mushroom : MonoBehaviour
 
     public float walkSpeed = 2f;
 
+    public enum WalkableDirection
+    {
+        Left,
+        Right
+    }
+
+    public WalkableDirection _walkableDirection;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
