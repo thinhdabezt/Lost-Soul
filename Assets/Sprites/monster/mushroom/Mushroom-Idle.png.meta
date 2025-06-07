@@ -134,7 +134,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 42cb4f9bc8ba7fb4ba41971a81e657a7
-      internalID: 1900827951
+      internalID: -654737500350741434
       vertices: []
       indices: 
       edges: []
@@ -156,7 +156,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 841b4d52f814d0f40b7d6f5ee783c1b7
-      internalID: -1683661647
+      internalID: -7095357931098475539
       vertices: []
       indices: 
       edges: []
@@ -178,7 +178,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: ee45beaab0fa42c4789f72e81b8c5fda
-      internalID: -1777674537
+      internalID: 2163288782968092727
       vertices: []
       indices: 
       edges: []
@@ -200,7 +200,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 9c79a1b9e2618a045ae90bf27b4376c0
-      internalID: 1501720837
+      internalID: -4210055123308685074
       vertices: []
       indices: 
       edges: []
@@ -222,7 +222,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 37a8c7b772dfd7447a46a46d7bb29a9f
-      internalID: -2085823972
+      internalID: -9004658040723243172
       vertices: []
       indices: 
       edges: []
@@ -244,7 +244,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 5e71d3e5dd2324349b392860b438e457
-      internalID: 230998330
+      internalID: 920352064709726215
       vertices: []
       indices: 
       edges: []
@@ -266,7 +266,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 8d44270eacf1d8f46bf70bb345d1036c
-      internalID: 1424498520
+      internalID: -8565668554048287875
       vertices: []
       indices: 
       edges: []
@@ -285,13 +285,13 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Mushroom-Idle_0: 1900827951
-      Mushroom-Idle_1: -1683661647
-      Mushroom-Idle_2: -1777674537
-      Mushroom-Idle_3: 1501720837
-      Mushroom-Idle_4: -2085823972
-      Mushroom-Idle_5: 230998330
-      Mushroom-Idle_6: 1424498520
+      Mushroom-Idle_0: -654737500350741434
+      Mushroom-Idle_1: -7095357931098475539
+      Mushroom-Idle_2: 2163288782968092727
+      Mushroom-Idle_3: -4210055123308685074
+      Mushroom-Idle_4: -9004658040723243172
+      Mushroom-Idle_5: 920352064709726215
+      Mushroom-Idle_6: -8565668554048287875
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
