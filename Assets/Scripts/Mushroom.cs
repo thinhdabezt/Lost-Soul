@@ -12,7 +12,30 @@ public class Mushroom : MonoBehaviour
         Right
     }
 
-    public WalkableDirection _walkableDirection;
+    private WalkableDirection _walkableDirection;
+
+    public WalkableDirection walkableDirection
+    {
+        get { return _walkableDirection; }
+        set
+        {
+            if (_walkableDirection != value)
+            {
+                gameObject.transform.localScale = new Vector2(gameObject.transform.localScale.x * -1, transform.localScale.y);
+
+                if (value == WalkableDirection.Left)
+                {
+                    rb.linearVelocity = new Vector2(-walkSpeed, rb.linearVelocity.y);
+                }
+                else if (value == WalkableDirection.Right)
+                {
+                    rb.linearVelocity = new Vector2(walkSpeed, rb.linearVelocity.y);
+                }
+            }
+
+            _walkableDirection = value;
+        }
+    }
 
     private void Awake()
     {
