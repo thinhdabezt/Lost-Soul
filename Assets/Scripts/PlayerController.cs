@@ -107,7 +107,7 @@ public class PlayerController : MonoBehaviour
     }
     public void OnRunning(InputAction.CallbackContext context)
     {
-        if (context.started)
+        if (context.started && touchingDirection.IsGround)
         {
             IsRunning = true;
         }

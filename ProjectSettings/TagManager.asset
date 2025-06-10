@@ -13,10 +13,10 @@ TagManager:
   - UI
   - Tilemap
   - TilemapNoCollision
-  - 
-  - 
-  - 
-  - 
+  - Player
+  - PlayerHitbox
+  - Enemy
+  - EnemyHitbox
   - 
   - 
   - 
