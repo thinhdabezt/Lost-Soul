@@ -8,9 +8,9 @@ public class TouchingDirection : MonoBehaviour
 
     public ContactFilter2D contactFilter;
 
-    RaycastHit2D[] groundHits = new RaycastHit2D[5];
-    RaycastHit2D[] wallHits = new RaycastHit2D[5];
-    RaycastHit2D[] ceilingHits = new RaycastHit2D[5];
+    RaycastHit2D[] groundHits = new RaycastHit2D[10];
+    RaycastHit2D[] wallHits = new RaycastHit2D[10];
+    RaycastHit2D[] ceilingHits = new RaycastHit2D[10];
 
     public float groundCheckDistance = 0.1f;
     public float wallCheckDistance = 0.2f;

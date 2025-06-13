@@ -15,5 +15,7 @@ namespace Assets.Scripts
         internal static string IsOnWall = "isOnWall";
         internal static string IsCeiling = "isOnCeiling";
         internal static string Attack = "attack";
+        internal static string HasTarget = "hasTarget";
+        internal static string IsAlive = "isAlive";
     }
 }
