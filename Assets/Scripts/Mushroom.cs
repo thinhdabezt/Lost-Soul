@@ -4,7 +4,7 @@ using UnityEngine;
 public class Mushroom : MonoBehaviour
 {
     Rigidbody2D rb;
-    TouchingDirection touchingDirection;
+    LeftSpriteTouchingDirections touchingDirection;
     Animator animator;
 
     public float walkSpeed = 2f;
@@ -19,7 +19,7 @@ public class Mushroom : MonoBehaviour
 
     private bool wasTouchingWallLastFrame = false;
 
-    private Vector2 walkDirectionVector = Vector2.right;
+    private Vector2 walkDirectionVector = Vector2.left;
 
     private WalkableDirection _walkableDirection;
 
@@ -29,30 +29,30 @@ public class Mushroom : MonoBehaviour
         set
         {
             if (_walkableDirection != value)
-            //{
-            //    gameObject.transform.localScale = new Vector2(gameObject.transform.localScale.x * -1, gameObject.transform.localScale.y);
-
-            //    if (value == WalkableDirection.Right)
-            //    {
-            //        walkDirectionVector = Vector2.left;
-            //    }
-            //    else if (value == WalkableDirection.Left)
-            //    {
-            //        walkDirectionVector = Vector2.right;
-            //    }
-            //}
-            if (_walkableDirection != value)
             {
-                Vector3 localScale = gameObject.transform.localScale;
+                gameObject.transform.localScale = new Vector2(gameObject.transform.localScale.x * -1, gameObject.transform.localScale.y);
 
                 if (value == WalkableDirection.Right)
-                    localScale.x = -Mathf.Abs(localScale.x);
-                else
-                    localScale.x = Mathf.Abs(localScale.x);
-                gameObject.transform.localScale = localScale;
-
-                walkDirectionVector = (value == WalkableDirection.Right) ? Vector2.right : Vector2.left;
+                {
+                    walkDirectionVector = Vector2.right;
+                }
+                else if (value == WalkableDirection.Left)
+                {
+                    walkDirectionVector = Vector2.left;
+                }
             }
+            //if (_walkableDirection != value)
+            //{
+            //    Vector3 localScale = gameObject.transform.localScale;
+
+            //    if (value == WalkableDirection.Right)
+            //        localScale.x = Mathf.Abs(localScale.x);
+            //    else
+            //        localScale.x = -Mathf.Abs(localScale.x);
+            //    gameObject.transform.localScale = localScale;
+
+            //    walkDirectionVector = (value == WalkableDirection.Right) ? Vector2.left : Vector2.right;
+            //}
 
             _walkableDirection = value;
         }
@@ -75,7 +75,7 @@ public class Mushroom : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        touchingDirection = GetComponent<TouchingDirection>();
+        touchingDirection = GetComponent<LeftSpriteTouchingDirections>();
         animator = GetComponent<Animator>();
     }
 
@@ -95,7 +95,6 @@ public class Mushroom : MonoBehaviour
     {
         bool isTouchingWallNow = touchingDirection.IsOnWall && touchingDirection.IsGround;
 
-        // Flip only on the first frame of contact with wall + ground
         if (isTouchingWallNow && !wasTouchingWallLastFrame)
         {
             FlipDirection();

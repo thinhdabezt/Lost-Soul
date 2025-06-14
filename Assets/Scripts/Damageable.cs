@@ -48,7 +48,7 @@ public class Damageable : MonoBehaviour
         {
             _isAlive = value;
             animator.SetBool(AnimationStrings.IsAlive, value);
-            Debug.Log($"IsAlive set to: {value}");
+            //Debug.Log($"IsAlive set to: {value}");
         }
     }
 
@@ -75,7 +75,7 @@ public class Damageable : MonoBehaviour
 
             timeSinceHit += Time.deltaTime; // Increment the timer
         }
-        Debug.Log($"IsAlive set to: {_health}");
+        //Debug.Log($"IsAlive set to: {_health}");
         TakeDamage(20);
     }
 

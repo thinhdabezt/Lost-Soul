@@ -1,16 +1,16 @@
 using Assets.Scripts;
 using UnityEngine;
 
-public class TouchingDirection : MonoBehaviour
+public class RightSpriteTouchingDirections : MonoBehaviour
 {
     CapsuleCollider2D capsuleCollider2d;
     Animator animator;
 
     public ContactFilter2D contactFilter;
 
-    RaycastHit2D[] groundHits = new RaycastHit2D[10];
-    RaycastHit2D[] wallHits = new RaycastHit2D[10];
-    RaycastHit2D[] ceilingHits = new RaycastHit2D[10];
+    RaycastHit2D[] groundHits = new RaycastHit2D[5];
+    RaycastHit2D[] wallHits = new RaycastHit2D[5];
+    RaycastHit2D[] ceilingHits = new RaycastHit2D[5];
 
     public float groundCheckDistance = 0.1f;
     public float wallCheckDistance = 0.2f;
@@ -91,5 +91,9 @@ public class TouchingDirection : MonoBehaviour
         IsGround = capsuleCollider2d.Cast(Vector2.down, contactFilter, groundHits, groundCheckDistance) > 0;
         IsOnWall = capsuleCollider2d.Cast(wallCheckDirection, contactFilter, wallHits, wallCheckDistance) > 0;
         IsOnCeiling = capsuleCollider2d.Cast(Vector2.up, contactFilter, ceilingHits, ceilingCheckDistance) > 0;
+        Vector2 origin = transform.position;
+        Debug.DrawRay(origin, Vector2.down * groundCheckDistance, Color.green);   // ground check
+        Debug.DrawRay(origin, wallCheckDirection * wallCheckDistance, Color.red); // wall check
+        Debug.DrawRay(origin, Vector2.up * ceilingCheckDistance, Color.blue);     // ceiling ch
     }
 }

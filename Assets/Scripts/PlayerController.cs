@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
 {
     Rigidbody2D rb;
     Animator animator;
-    TouchingDirection touchingDirection;
+    RightSpriteTouchingDirections touchingDirection;
 
     Vector2 moveInput;
 
@@ -63,7 +63,7 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        touchingDirection = GetComponent<TouchingDirection>();
+        touchingDirection = GetComponent<RightSpriteTouchingDirections>();
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created  
