@@ -8,6 +8,7 @@ public class Mushroom : MonoBehaviour
     Animator animator;
 
     public float walkSpeed = 2f;
+    public float walkStopRate = 0.05f;
 
     public DetectionZone attackZone;
 
@@ -59,6 +60,7 @@ public class Mushroom : MonoBehaviour
     }
 
     public bool _hasTarget = false;
+
     public bool HasTarget
     {
         get
@@ -70,6 +72,11 @@ public class Mushroom : MonoBehaviour
             _hasTarget = value;
             animator.SetBool(AnimationStrings.HasTarget, value);
         } 
+    }
+
+    public bool CanMove
+    {
+        get { return animator.GetBool(AnimationStrings.CanMove); }
     }
 
     private void Awake()
@@ -102,7 +109,14 @@ public class Mushroom : MonoBehaviour
 
         wasTouchingWallLastFrame = isTouchingWallNow;
 
-        rb.linearVelocity = new Vector2(walkSpeed * walkDirectionVector.x, rb.linearVelocity.y);
+        if (CanMove)
+        {
+            rb.linearVelocity = new Vector2(walkSpeed * walkDirectionVector.x, rb.linearVelocity.y);
+        }
+        else
+        {
+            rb.linearVelocity = new Vector2(Mathf.Lerp(rb.linearVelocity.x, 0, walkStopRate), rb.linearVelocity.y);
+        }
     }
 
     public void FlipDirection()

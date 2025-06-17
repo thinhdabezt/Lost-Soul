@@ -17,5 +17,8 @@ namespace Assets.Scripts
         internal static string Attack = "attack";
         internal static string HasTarget = "hasTarget";
         internal static string IsAlive = "isAlive";
+        internal static string yVelocity = "yVelocity";
+        internal static string CanMove = "canMove";
+        internal static string isHit = "isHit";
     }
 }
