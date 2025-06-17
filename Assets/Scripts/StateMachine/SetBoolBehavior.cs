@@ -54,6 +54,5 @@ public class SetBoolBehavior : StateMachineBehaviour
     {
         if (updateOnStateMachine)
             animator.SetBool(boolName, valueOnExit);
-
     }
 }

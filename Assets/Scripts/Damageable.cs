@@ -1,9 +1,11 @@
 using Assets.Scripts;
 using UnityEngine;
+using UnityEngine.Events;
 using static UnityEngine.Rendering.DebugUI;
 
 public class Damageable : MonoBehaviour
 {
+    public UnityEvent<int, Vector2> Hit;
     Animator animator;
 
     private bool isInvincible = false;
@@ -34,10 +36,14 @@ public class Damageable : MonoBehaviour
         set
         {
             _health = Mathf.Max(0, value);
+            if(_health <= 0)
+            {
+                IsAlive = false;
+            }
         }
     }
 
-    private bool _isAlive;
+    private bool _isAlive = true;
     public bool IsAlive
     {
         get
@@ -48,7 +54,18 @@ public class Damageable : MonoBehaviour
         {
             _isAlive = value;
             animator.SetBool(AnimationStrings.IsAlive, value);
-            Debug.Log($"IsAlive set to: {value}");
+        }
+    }
+
+    public bool IsHit
+    {
+        get
+        {
+            return animator.GetBool(AnimationStrings.isHit);
+        }
+        set
+        {
+            animator.SetBool(AnimationStrings.isHit, value);
         }
     }
 
@@ -70,25 +87,24 @@ public class Damageable : MonoBehaviour
             if (timeSinceHit > invincibleTime)
             {
                 isInvincible = false;
-                timeSinceHit = 0f; // Reset the timer after invincibility ends
+                timeSinceHit = 0f;
             }
 
-            timeSinceHit += Time.deltaTime; // Increment the timer
+            timeSinceHit += Time.deltaTime;
         }
-        Debug.Log($"IsAlive set to: {_health}");
-        TakeDamage(20);
     }
 
-    public void TakeDamage(int damage)
+    public bool TakeDamage(int damage, Vector2 knockback)
     {
         if (IsAlive && !isInvincible)
         {
             Health -= damage;
             isInvincible = true;
-            if (Health <= 0)
-            {
-                IsAlive = false;
-            }
+
+            Hit?.Invoke(damage, knockback);
+
+            return true;
         }
+        return false;
     }
 }
