@@ -8,7 +8,6 @@ public class PlayerController : MonoBehaviour
     Rigidbody2D rb;
     Animator animator;
     RightSpriteTouchingDirections touchingDirection;
-    Damageable damageable;
 
     Vector2 moveInput;
 
@@ -46,7 +45,7 @@ public class PlayerController : MonoBehaviour
         {
             if (_isMoving != value)
             {
-                animator.SetBool(AnimationStrings.IsMoving, value);
+                animator.SetBool(AnimationStrings.isMoving, value);
             }
             _isMoving = value;
         }
@@ -60,7 +59,7 @@ public class PlayerController : MonoBehaviour
         {
             if (_isRunning != value)
             {
-                animator.SetBool(AnimationStrings.IsRunning, value);
+                animator.SetBool(AnimationStrings.isRunning, value);
             }
             _isRunning = value;
         }
@@ -84,12 +83,17 @@ public class PlayerController : MonoBehaviour
 
     public bool CanMove
     {
-        get { return animator.GetBool(AnimationStrings.CanMove); }
+        get { return animator.GetBool(AnimationStrings.canMove); }
     }
 
     public bool IsAlive
     {
-        get { return animator.GetBool(AnimationStrings.IsAlive); }
+        get { return animator.GetBool(AnimationStrings.isAlive); }
+    }
+
+    public bool LockVelocity
+    {
+        get { return animator.GetBool(AnimationStrings.lockVelocity); }
     }
 
     private void Awake()
@@ -97,7 +101,6 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         touchingDirection = GetComponent<RightSpriteTouchingDirections>();
-        damageable = GetComponent<Damageable>();
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created  
@@ -114,7 +117,7 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!damageable.IsHit)
+        if (!LockVelocity)
         {
             rb.linearVelocity = new Vector2(moveInput.x * CurrentSpeed, rb.linearVelocity.y);
         }
@@ -138,7 +141,7 @@ public class PlayerController : MonoBehaviour
     {
         if (context.started && touchingDirection.IsGround && CanMove)
         {
-            animator.SetTrigger(AnimationStrings.Jump);
+            animator.SetTrigger(AnimationStrings.jump);
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
         }
     }
@@ -158,7 +161,7 @@ public class PlayerController : MonoBehaviour
     {
         if (context.started)
         {
-            animator.SetTrigger(AnimationStrings.Attack);
+            animator.SetTrigger(AnimationStrings.attackTrigger);
         }
     }
 
