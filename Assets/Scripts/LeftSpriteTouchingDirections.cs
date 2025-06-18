@@ -31,7 +31,7 @@ public class LeftSpriteTouchingDirections : MonoBehaviour
             if (_isGrounded != value)
             {
                 _isGrounded = value;
-                animator.SetBool(AnimationStrings.IsGrounded, value);
+                animator.SetBool(AnimationStrings.isGrounded, value);
             }
             _isGrounded = value;
         }
@@ -50,7 +50,7 @@ public class LeftSpriteTouchingDirections : MonoBehaviour
             if (_isOnWall != value)
             {
                 _isOnWall = value;
-                animator.SetBool(AnimationStrings.IsOnWall, value);
+                animator.SetBool(AnimationStrings.isOnWall, value);
             }
             _isOnWall = value;
         }
@@ -69,7 +69,7 @@ public class LeftSpriteTouchingDirections : MonoBehaviour
             if (_isOnCeiling != value)
             {
                 _isOnCeiling = value;
-                animator.SetBool(AnimationStrings.IsOnWall, value);
+                animator.SetBool(AnimationStrings.isOnWall, value);
             }
             _isOnCeiling = value;
         }

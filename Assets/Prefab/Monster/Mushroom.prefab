@@ -284,6 +284,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackDamage: 10
+  knockback: {x: 0, y: 0}
 --- !u!1 &9071039995234001989
 GameObject:
   m_ObjectHideFlags: 0
@@ -511,6 +512,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 827417cfbbfecb746a1914e27176a5a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Hit:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6593340641641386314}
+        m_TargetAssemblyTypeName: Mushroom, Assembly-CSharp
+        m_MethodName: OnHit
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   invincibleTime: 0.25
   _maxHealth: 120
   _health: 120

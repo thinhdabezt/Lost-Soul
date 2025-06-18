@@ -70,13 +70,13 @@ public class Mushroom : MonoBehaviour
         private set 
         {
             _hasTarget = value;
-            animator.SetBool(AnimationStrings.HasTarget, value);
+            animator.SetBool(AnimationStrings.hasTarget, value);
         } 
     }
 
     public bool CanMove
     {
-        get { return animator.GetBool(AnimationStrings.CanMove); }
+        get { return animator.GetBool(AnimationStrings.canMove); }
     }
 
     private void Awake()
@@ -129,5 +129,9 @@ public class Mushroom : MonoBehaviour
         {
             walkableDirection = WalkableDirection.Left;
         }
+    }
+    public void OnHit(int damage, Vector2 knockback)
+    {
+        rb.linearVelocity = new Vector2(knockback.x, rb.linearVelocity.y + knockback.y);
     }
 }

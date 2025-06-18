@@ -53,19 +53,7 @@ public class Damageable : MonoBehaviour
         set
         {
             _isAlive = value;
-            animator.SetBool(AnimationStrings.IsAlive, value);
-        }
-    }
-
-    public bool IsHit
-    {
-        get
-        {
-            return animator.GetBool(AnimationStrings.isHit);
-        }
-        set
-        {
-            animator.SetBool(AnimationStrings.isHit, value);
+            animator.SetBool(AnimationStrings.isAlive, value);
         }
     }
 
@@ -100,6 +88,8 @@ public class Damageable : MonoBehaviour
         {
             Health -= damage;
             isInvincible = true;
+
+            animator.SetTrigger(AnimationStrings.hit);
 
             Hit?.Invoke(damage, knockback);
 
