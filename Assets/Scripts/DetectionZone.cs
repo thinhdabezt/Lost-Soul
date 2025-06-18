@@ -25,17 +25,12 @@ public class DetectionZone : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision != col)
-        {
-            detectedColliders.Add(collision);
-        }
+         detectedColliders.Add(collision);
+
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision != col)
-        {
-            detectedColliders.Remove(collision);
-        }
+         detectedColliders.Remove(collision);
     }
 }

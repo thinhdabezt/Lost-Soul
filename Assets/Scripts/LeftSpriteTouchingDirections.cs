@@ -1,7 +1,7 @@
 using Assets.Scripts;
 using UnityEngine;
 
-public class TouchingDirection : MonoBehaviour
+public class LeftSpriteTouchingDirections : MonoBehaviour
 {
     CapsuleCollider2D capsuleCollider2d;
     Animator animator;
@@ -16,12 +16,13 @@ public class TouchingDirection : MonoBehaviour
     public float wallCheckDistance = 0.2f;
     public float ceilingCheckDistance = 0.05f;
 
-    private Vector2 wallCheckDirection => gameObject.transform.localScale.x > 0 ? Vector2.right : Vector2.left;
+    private Vector2 wallCheckDirection => gameObject.transform.localScale.x > 0 ? Vector2.left : Vector2.right;
 
     private bool _isGrounded = true;
 
-    public bool IsGround 
-    { get 
+    public bool IsGround
+    {
+        get
         {
             return _isGrounded;
         }
@@ -29,8 +30,8 @@ public class TouchingDirection : MonoBehaviour
         {
             if (_isGrounded != value)
             {
-                _isGrounded= value;
-                animator.SetBool(AnimationStrings.IsGrounded, value);
+                _isGrounded = value;
+                animator.SetBool(AnimationStrings.isGrounded, value);
             }
             _isGrounded = value;
         }
@@ -49,7 +50,7 @@ public class TouchingDirection : MonoBehaviour
             if (_isOnWall != value)
             {
                 _isOnWall = value;
-                animator.SetBool(AnimationStrings.IsOnWall, value);
+                animator.SetBool(AnimationStrings.isOnWall, value);
             }
             _isOnWall = value;
         }
@@ -68,7 +69,7 @@ public class TouchingDirection : MonoBehaviour
             if (_isOnCeiling != value)
             {
                 _isOnCeiling = value;
-                animator.SetBool(AnimationStrings.IsOnWall, value);
+                animator.SetBool(AnimationStrings.isOnWall, value);
             }
             _isOnCeiling = value;
         }
@@ -82,7 +83,7 @@ public class TouchingDirection : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -91,5 +92,9 @@ public class TouchingDirection : MonoBehaviour
         IsGround = capsuleCollider2d.Cast(Vector2.down, contactFilter, groundHits, groundCheckDistance) > 0;
         IsOnWall = capsuleCollider2d.Cast(wallCheckDirection, contactFilter, wallHits, wallCheckDistance) > 0;
         IsOnCeiling = capsuleCollider2d.Cast(Vector2.up, contactFilter, ceilingHits, ceilingCheckDistance) > 0;
+        Vector2 origin = transform.position;
+        Debug.DrawRay(origin, Vector2.down * groundCheckDistance, Color.green);   // ground check
+        Debug.DrawRay(origin, wallCheckDirection * wallCheckDistance, Color.red); // wall check
+        Debug.DrawRay(origin, Vector2.up * ceilingCheckDistance, Color.blue);     // ceiling ch
     }
 }

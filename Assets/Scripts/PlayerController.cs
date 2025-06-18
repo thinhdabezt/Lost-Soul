@@ -7,13 +7,35 @@ public class PlayerController : MonoBehaviour
 {
     Rigidbody2D rb;
     Animator animator;
-    TouchingDirection touchingDirection;
+    RightSpriteTouchingDirections touchingDirection;
 
     Vector2 moveInput;
 
     [SerializeField] float walkSpeed = 4f;
     [SerializeField] float runSpeed = 7f;
     [SerializeField] float jumpForce = 7f;
+
+    public float CurrentSpeed
+    {
+        get
+        {
+            if (CanMove)
+            {
+                if (IsMoving && !touchingDirection.IsOnWall)
+                {
+                    return IsRunning ? runSpeed : walkSpeed;
+                }
+                else
+                {
+                    return 0f;
+                }
+            }
+            else
+            {
+                return 0f;
+            }
+        }
+    }
 
     private bool _isMoving = false;
     public bool IsMoving
@@ -23,7 +45,7 @@ public class PlayerController : MonoBehaviour
         {
             if (_isMoving != value)
             {
-                animator.SetBool(AnimationStrings.IsMoving, value);
+                animator.SetBool(AnimationStrings.isMoving, value);
             }
             _isMoving = value;
         }
@@ -37,7 +59,7 @@ public class PlayerController : MonoBehaviour
         {
             if (_isRunning != value)
             {
-                animator.SetBool(AnimationStrings.IsRunning, value);
+                animator.SetBool(AnimationStrings.isRunning, value);
             }
             _isRunning = value;
         }
@@ -59,11 +81,26 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public bool CanMove
+    {
+        get { return animator.GetBool(AnimationStrings.canMove); }
+    }
+
+    public bool IsAlive
+    {
+        get { return animator.GetBool(AnimationStrings.isAlive); }
+    }
+
+    public bool LockVelocity
+    {
+        get { return animator.GetBool(AnimationStrings.lockVelocity); }
+    }
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        touchingDirection = GetComponent<TouchingDirection>();
+        touchingDirection = GetComponent<RightSpriteTouchingDirections>();
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created  
@@ -80,28 +117,31 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (_isRunning)
+        if (!LockVelocity)
         {
-            rb.linearVelocity = new Vector2(moveInput.x * runSpeed, rb.linearVelocity.y);
+            rb.linearVelocity = new Vector2(moveInput.x * CurrentSpeed, rb.linearVelocity.y);
         }
-        else
-        {
-            rb.linearVelocity = new Vector2(moveInput.x * walkSpeed, rb.linearVelocity.y);
-        }
+
+        animator.SetFloat(AnimationStrings.yVelocity, rb.linearVelocity.y);
     }
 
     public void OnMove(InputAction.CallbackContext context)
     {
         moveInput = context.ReadValue<Vector2>();
-        IsMoving = moveInput != Vector2.zero;
-        SetFacingDirection(moveInput);
+
+        if (IsAlive)
+        {
+            SetFacingDirection(moveInput);
+
+            IsMoving = moveInput.x != 0;
+        }
     }
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        if (context.started && touchingDirection.IsGround)
+        if (context.started && touchingDirection.IsGround && CanMove)
         {
-            animator.SetTrigger(AnimationStrings.Jump);
+            animator.SetTrigger(AnimationStrings.jump);
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
         }
     }
@@ -121,7 +161,7 @@ public class PlayerController : MonoBehaviour
     {
         if (context.started)
         {
-            animator.SetTrigger(AnimationStrings.Attack);
+            animator.SetTrigger(AnimationStrings.attackTrigger);
         }
     }
 
@@ -135,5 +175,10 @@ public class PlayerController : MonoBehaviour
         {
             IsFacingRight = false;
         }
+    }
+
+    public void OnHit(int damage, Vector2 knockback)
+    {
+        rb.linearVelocity = new Vector2(knockback.x, rb.linearVelocity.y + knockback.y);
     }
 }
