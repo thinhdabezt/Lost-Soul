@@ -1,14 +1,17 @@
 using Assets.Scripts;
 using UnityEngine;
 
-public class Mushroom : MonoBehaviour
+public class Boar : MonoBehaviour
 {
     Rigidbody2D rb;
     LeftSpriteTouchingDirections touchingDirection;
     Animator animator;
     Damageable damageable;
 
-    public float walkSpeed = 2f;
+    public GameObject dropItemPrefab;
+
+    public float walkSpeed = 1f;
+    public float runSpeed = 4f;
     public float walkStopRate = 0.05f;
 
     public DetectionZone attackZone;
@@ -43,18 +46,6 @@ public class Mushroom : MonoBehaviour
                     walkDirectionVector = Vector2.left;
                 }
             }
-            //if (_walkableDirection != value)
-            //{
-            //    Vector3 localScale = gameObject.transform.localScale;
-
-            //    if (value == WalkableDirection.Right)
-            //        localScale.x = Mathf.Abs(localScale.x);
-            //    else
-            //        localScale.x = -Mathf.Abs(localScale.x);
-            //    gameObject.transform.localScale = localScale;
-
-            //    walkDirectionVector = (value == WalkableDirection.Right) ? Vector2.left : Vector2.right;
-            //}
 
             _walkableDirection = value;
         }
@@ -67,12 +58,12 @@ public class Mushroom : MonoBehaviour
         get
         {
             return _hasTarget;
-        } 
-        private set 
+        }
+        private set
         {
             _hasTarget = value;
             animator.SetBool(AnimationStrings.hasTarget, value);
-        } 
+        }
     }
 
     public bool CanMove
@@ -91,7 +82,7 @@ public class Mushroom : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+
     }
 
     void Update()
@@ -111,11 +102,18 @@ public class Mushroom : MonoBehaviour
 
         wasTouchingWallLastFrame = isTouchingWallNow;
 
-        if(!damageable.LockVelocity)
+        if (!damageable.LockVelocity)
         {
             if (CanMove)
             {
-                rb.linearVelocity = new Vector2(walkSpeed * walkDirectionVector.x, rb.linearVelocity.y);
+                if (HasTarget)
+                {
+                    rb.linearVelocity = new Vector2(runSpeed * walkDirectionVector.x, rb.linearVelocity.y);
+                }
+                else
+                {
+                    rb.linearVelocity = new Vector2(walkSpeed * walkDirectionVector.x, rb.linearVelocity.y);
+                }
             }
             else
             {
@@ -137,6 +135,7 @@ public class Mushroom : MonoBehaviour
     }
     public void OnHit(int damage, Vector2 knockback)
     {
+        HasTarget = true;
         rb.linearVelocity = new Vector2(knockback.x, rb.linearVelocity.y + knockback.y);
     }
 }

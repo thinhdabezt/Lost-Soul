@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     Rigidbody2D rb;
     Animator animator;
     RightSpriteTouchingDirections touchingDirection;
+    Damageable damageable;
 
     Vector2 moveInput;
 
@@ -91,16 +92,13 @@ public class PlayerController : MonoBehaviour
         get { return animator.GetBool(AnimationStrings.isAlive); }
     }
 
-    public bool LockVelocity
-    {
-        get { return animator.GetBool(AnimationStrings.lockVelocity); }
-    }
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         touchingDirection = GetComponent<RightSpriteTouchingDirections>();
+        damageable = GetComponent<Damageable>();
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created  
@@ -117,7 +115,7 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!LockVelocity)
+        if (!damageable.LockVelocity)
         {
             rb.linearVelocity = new Vector2(moveInput.x * CurrentSpeed, rb.linearVelocity.y);
         }
