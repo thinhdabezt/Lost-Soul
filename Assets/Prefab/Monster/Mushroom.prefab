@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7885359271675432389}
   - component: {fileID: 6867998131327251744}
   - component: {fileID: 1863667945586409668}
-  m_Layer: 11
+  m_Layer: 13
   m_Name: CliffDetectionZone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -67,7 +67,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.27273607, y: -1.2859292}
+  m_Offset: {x: 0.18648124, y: -1.2859292}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -77,7 +77,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1.0300694, y: 0.8922844}
+  m_Size: {x: 0.8575597, y: 0.8922844}
   m_EdgeRadius: 0
 --- !u!114 &1863667945586409668
 MonoBehaviour:
@@ -104,7 +104,7 @@ GameObject:
   - component: {fileID: 5689402967626003394}
   - component: {fileID: 2044972276894945106}
   m_Layer: 11
-  m_Name: DetectionZone
+  m_Name: HitboxDetectionZone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -302,6 +302,7 @@ GameObject:
   - component: {fileID: 6593340641641386314}
   - component: {fileID: 654507400972513805}
   - component: {fileID: 7733944179096709338}
+  - component: {fileID: 6413857818440623470}
   m_Layer: 10
   m_Name: Mushroom
   m_TagString: Untagged
@@ -318,7 +319,7 @@ Transform:
   m_GameObject: {fileID: 9071039995234001989}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 33.39, y: -8.23, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -499,6 +500,7 @@ MonoBehaviour:
   walkSpeed: 3
   walkStopRate: 0.5
   attackZone: {fileID: 2044972276894945106}
+  cliffDetectionZone: {fileID: 1863667945586409668}
   _hasTarget: 0
 --- !u!114 &654507400972513805
 MonoBehaviour:
@@ -512,7 +514,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 827417cfbbfecb746a1914e27176a5a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Hit:
+  hit:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 6593340641641386314}
@@ -527,6 +529,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  healthChanged:
+    m_PersistentCalls:
+      m_Calls: []
   invincibleTime: 0.25
   _maxHealth: 120
   _health: 120
@@ -559,3 +564,16 @@ MonoBehaviour:
   groundCheckDistance: 0.1
   wallCheckDistance: 0.5
   ceilingCheckDistance: 0.05
+--- !u!114 &6413857818440623470
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9071039995234001989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79623de1b219f924c8663f978a187b70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dropPrefab: {fileID: 2777230619582839317, guid: a8e0846d523dfe241ace90a14bbc4fa0, type: 3}

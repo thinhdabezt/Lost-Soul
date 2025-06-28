@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2539024359306213843}
   - component: {fileID: 1936769328908232253}
   - component: {fileID: 7092526218624456992}
+  - component: {fileID: 4253455636499379075}
   m_Layer: 0
   m_Name: HealingPotion
   m_TagString: Untagged
@@ -27,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 3539801219993389521}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 40.731476, y: -6.049518, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.3, y: 0.3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -100,3 +101,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88b13b1fa52f1eb4d8470fc0493be5a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healthAmount: 20
+  spinRotationSpeed: {x: 0, y: 180, z: 0}
+--- !u!70 &4253455636499379075
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3539801219993389521}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0.00000049670535, y: 0.006865958}
+  m_Size: {x: 1.0250856, y: 1.409559}
+  m_Direction: 0

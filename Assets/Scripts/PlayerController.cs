@@ -1,10 +1,13 @@
 using Assets.Scripts;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.Splines;
 
 public class PlayerController : MonoBehaviour
 {
+    private static PlayerController instance;
+
     Rigidbody2D rb;
     Animator animator;
     RightSpriteTouchingDirections touchingDirection;
@@ -67,6 +70,7 @@ public class PlayerController : MonoBehaviour
     }
 
 
+
     private bool _isFacingRight = true;
     public bool IsFacingRight
     {
@@ -99,6 +103,16 @@ public class PlayerController : MonoBehaviour
         animator = GetComponent<Animator>();
         touchingDirection = GetComponent<RightSpriteTouchingDirections>();
         damageable = GetComponent<Damageable>();
+        DontDestroyOnLoad(gameObject);
+
+        if (instance != null && instance != this)
+        {
+            Destroy(instance.gameObject);
+            return;
+        }
+
+        instance = this;
+        DontDestroyOnLoad(gameObject);
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created  
@@ -137,7 +151,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        if (context.started && touchingDirection.IsGround && CanMove)
+        if (context.started && touchingDirection.IsGrounded && CanMove)
         {
             animator.SetTrigger(AnimationStrings.jump);
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
@@ -145,7 +159,7 @@ public class PlayerController : MonoBehaviour
     }
     public void OnRunning(InputAction.CallbackContext context)
     {
-        if (context.started && touchingDirection.IsGround)
+        if (context.started && touchingDirection.IsGrounded)
         {
             IsRunning = true;
         }

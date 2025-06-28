@@ -21,5 +21,7 @@ namespace Assets.Scripts
         internal static string canMove = "canMove";
         internal static string lockVelocity = "lockVelocity";
         internal static string hit = "hit";
+        internal static string attackCooldown = "attackCooldown";
+        internal static string startLoadNextLevel = "startLoadNextLevel";
     }
 }

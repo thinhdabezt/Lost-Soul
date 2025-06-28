@@ -18,21 +18,17 @@ public class HealthPickup : MonoBehaviour
         transform.eulerAngles += spinRotationSpeed * Time.deltaTime;
     }
 
-    //private void OnTriggerEnter2D(Collider2D collision)
-    //{
-    //    Damageable damageable = collision.GetComponent<Damageable>();
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Damageable damageable = collision.GetComponent<Damageable>();
 
-    //    if (damageable)
-    //    {
-    //        bool wasHealed = damageable.Heal(healthAmount);
-    //        if (wasHealed)
-    //        {
-    //            if (audioSource)
-    //            {
-    //                AudioSource.PlayClipAtPoint(audioSource.clip, gameObject.transform.position, audioSource.volume);
-    //            }
-    //            Destroy(gameObject);
-    //        }
-    //    }
-    //}
+        if (damageable)
+        {
+            bool wasHealed = damageable.Heal(healthAmount);
+            if (wasHealed)
+            {
+                Destroy(gameObject);
+            }
+        }
+    }
 }
