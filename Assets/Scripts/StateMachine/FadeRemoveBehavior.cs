@@ -37,6 +37,12 @@ public class FadeRemoveBehavior : StateMachineBehaviour
 
             if (timeElapsed >= fadeTime)
             {
+                var dropper = animator.GetComponent<DropOnDeath>();
+                if (dropper != null)
+                {
+                    dropper.Drop();
+                }
+
                 // Destroy the object after fading out
                 Destroy(objectToRemove);
             }

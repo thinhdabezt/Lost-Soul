@@ -20,7 +20,7 @@ public class LeftSpriteTouchingDirections : MonoBehaviour
 
     private bool _isGrounded = true;
 
-    public bool IsGround
+    public bool IsGrounded
     {
         get
         {
@@ -89,12 +89,8 @@ public class LeftSpriteTouchingDirections : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        IsGround = capsuleCollider2d.Cast(Vector2.down, contactFilter, groundHits, groundCheckDistance) > 0;
+        IsGrounded = capsuleCollider2d.Cast(Vector2.down, contactFilter, groundHits, groundCheckDistance) > 0;
         IsOnWall = capsuleCollider2d.Cast(wallCheckDirection, contactFilter, wallHits, wallCheckDistance) > 0;
         IsOnCeiling = capsuleCollider2d.Cast(Vector2.up, contactFilter, ceilingHits, ceilingCheckDistance) > 0;
-        Vector2 origin = transform.position;
-        Debug.DrawRay(origin, Vector2.down * groundCheckDistance, Color.green);   // ground check
-        Debug.DrawRay(origin, wallCheckDirection * wallCheckDistance, Color.red); // wall check
-        Debug.DrawRay(origin, Vector2.up * ceilingCheckDistance, Color.blue);     // ceiling ch
     }
 }

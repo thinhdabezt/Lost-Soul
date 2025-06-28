@@ -12,6 +12,7 @@ public class Mushroom : MonoBehaviour
     public float walkStopRate = 0.05f;
 
     public DetectionZone attackZone;
+    public DetectionZone cliffDetectionZone;
 
     public enum WalkableDirection
     {
@@ -80,6 +81,18 @@ public class Mushroom : MonoBehaviour
         get { return animator.GetBool(AnimationStrings.canMove); }
     }
 
+    public float AttackCooldown 
+    { 
+        get 
+        {
+            return animator.GetFloat(AnimationStrings.attackCooldown);
+        } 
+        private set 
+        { 
+            animator.SetFloat(AnimationStrings.attackCooldown, value);
+        } 
+    }
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -97,21 +110,31 @@ public class Mushroom : MonoBehaviour
     void Update()
     {
         HasTarget = attackZone.detectedColliders.Count > 0;
+        
+        if(AttackCooldown > 0)
+        {
+            AttackCooldown -= Time.deltaTime;
+        }
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        bool isTouchingWallNow = touchingDirection.IsOnWall && touchingDirection.IsGround;
+        bool isTouchingWallNow = touchingDirection.IsOnWall && touchingDirection.IsGrounded;
 
-        if (isTouchingWallNow && !wasTouchingWallLastFrame)
+        if (isTouchingWallNow && !wasTouchingWallLastFrame || cliffDetectionZone.detectedColliders.Count == 0)
         {
             FlipDirection();
         }
 
         wasTouchingWallLastFrame = isTouchingWallNow;
 
-        if(!damageable.LockVelocity)
+        //if (touchingDirection.IsGround && touchingDirection.IsOnWall || cliffDetectionZone.detectedColliders.Count > 0)
+        //{
+        //    FlipDirection();
+        //}
+
+        if (!damageable.LockVelocity)
         {
             if (CanMove)
             {
@@ -121,6 +144,10 @@ public class Mushroom : MonoBehaviour
             {
                 rb.linearVelocity = new Vector2(Mathf.Lerp(rb.linearVelocity.x, 0, walkStopRate), rb.linearVelocity.y);
             }
+        }
+        else
+        {
+            rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
         }
     }
 

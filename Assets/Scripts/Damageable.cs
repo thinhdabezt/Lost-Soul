@@ -5,14 +5,20 @@ using static UnityEngine.Rendering.DebugUI;
 
 public class Damageable : MonoBehaviour
 {
-    public UnityEvent<int, Vector2> Hit;
+    public UnityEvent<int, Vector2> hit;
+    public UnityEvent<int, int> healthChanged;
+    public UnityEvent OnPlayerDeath;
+
+    public enum DamageableType { Player, Enemy }
+
+    public DamageableType damageableType;
 
     Animator animator;
 
     private bool isInvincible = false;
     private float timeSinceHit = 0;
-    [SerializeField] private float invincibleTime = 0.25f;
 
+    [SerializeField] private float invincibleTime = 0.25f;
     [SerializeField] private int _maxHealth;
     public int MaxHealth
     {
@@ -37,8 +43,14 @@ public class Damageable : MonoBehaviour
         set
         {
             _health = Mathf.Max(0, value);
-            if(_health <= 0)
+            healthChanged?.Invoke(_health, MaxHealth);
+            if (_health <= 0)
             {
+                if (damageableType == DamageableType.Player)
+                {
+                    OnPlayerDeath?.Invoke();
+                }
+
                 IsAlive = false;
             }
         }
@@ -104,26 +116,28 @@ public class Damageable : MonoBehaviour
 
             animator.SetTrigger(AnimationStrings.hit);
             LockVelocity = true;
-            Hit?.Invoke(damage, knockback);
+            hit?.Invoke(damage, knockback);
+
+            CharacterEvents.characterDamaged?.Invoke(gameObject, damage);
 
             return true;
         }
         return false;
     }
 
-    //public bool Heal(int healthRestored)
-    //{
-    //    if (IsAlive && Health != MaxHealth)
-    //    {
-    //        int maxHealth = Mathf.Max(MaxHealth - Health, 0);
-    //        int actualHealthRestored = Mathf.Min(maxHealth, healthRestored);
-    //        Health += actualHealthRestored;
+    public bool Heal(int healthRestored)
+    {
+        if (IsAlive && Health != MaxHealth)
+        {
+            int maxHealth = Mathf.Max(MaxHealth - Health, 0);
+            int actualHealthRestored = Mathf.Min(maxHealth, healthRestored);
+            Health += actualHealthRestored;
 
-    //        CharacterEvents.onCharacterHealed?.Invoke(gameObject, actualHealthRestored);
+            CharacterEvents.characterHealed?.Invoke(gameObject, actualHealthRestored);
 
-    //        return true;
-    //    }
+            return true;
+        }
 
-    //    return false;
-    //}
+        return false;
+    }
 }
