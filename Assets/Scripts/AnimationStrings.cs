@@ -23,5 +23,6 @@ namespace Assets.Scripts
         internal static string hit = "hit";
         internal static string attackCooldown = "attackCooldown";
         internal static string startLoadNextLevel = "startLoadNextLevel";
+        internal static string specialTrigger = "special";
     }
 }

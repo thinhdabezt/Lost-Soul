@@ -16,7 +16,7 @@ public class RightSpriteTouchingDirections : MonoBehaviour
     public float wallCheckDistance = 0.2f;
     public float ceilingCheckDistance = 0.05f;
 
-    private Vector2 wallCheckDirection => gameObject.transform.localScale.x > 0 ? Vector2.right : Vector2.left;
+    public Vector2 wallCheckDirection => gameObject.transform.localScale.x > 0 ? Vector2.right : Vector2.left;
 
     private bool _isGrounded = true;
 

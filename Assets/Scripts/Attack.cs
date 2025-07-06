@@ -20,9 +20,10 @@ public class Attack : MonoBehaviour
     {
         // Check if the collided object has a Damageable component
         Damageable damageable = collision.GetComponent<Damageable>();
+        Vector2 deliveredKnockback = transform.parent.localScale.x > 0 ? knockback : new Vector2(-knockback.x, knockback.y);
         if (damageable != null && damageable.IsAlive)
         {
-            damageable.TakeDamage(attackDamage, knockback);
+            damageable.TakeDamage(attackDamage, deliveredKnockback);
         }
     }
 }

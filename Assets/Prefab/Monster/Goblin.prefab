@@ -221,6 +221,10 @@ MonoBehaviour:
   healthChanged:
     m_PersistentCalls:
       m_Calls: []
+  OnPlayerDeath:
+    m_PersistentCalls:
+      m_Calls: []
+  damageableType: 0
   invincibleTime: 0.25
   _maxHealth: 80
   _health: 80
