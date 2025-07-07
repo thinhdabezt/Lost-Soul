@@ -10,8 +10,10 @@ public class MainMenu : MonoBehaviour
 
     [Header("Username Elements")]
     public TMP_InputField usernameInputField; 
-    public Button confirmStartButton; 
+    public Button confirmStartButton;
 
+    [Header("External Managers")]
+    public Firebase firebaseManager;
     void Start()
     {
         mainMenuPanel.SetActive(true);
@@ -40,10 +42,23 @@ public class MainMenu : MonoBehaviour
 
     public void ConfirmStartGame()
     {
-        PlayerPrefs.SetString("Username", usernameInputField.text);
+        string username = usernameInputField.text;
+        confirmStartButton.interactable = false;
+        PlayerPrefs.SetString("Username", username);
         PlayerPrefs.Save();
 
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        firebaseManager.LoadPlayerData(username, (loadedData) => {
+            if (loadedData == null)
+            {
+                firebaseManager.SavePlayerData(username, 100, 1, 0,() => {
+                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+                });
+            }
+            else
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            }
+        });
     }
 
     public void BackToMainMenu()

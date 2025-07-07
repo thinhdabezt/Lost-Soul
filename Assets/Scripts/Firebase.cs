@@ -24,22 +24,29 @@ public class Firebase : MonoBehaviour
             Debug.LogError("firebase_config.json not found in Resources!");
         }
     }
-    public void SavePlayerData(string username, int health, int level)
+    public void SavePlayerData(string username, int health, int level, int score, System.Action onSaved = null)
     {
         Player data = new Player
         {
             username = username,
             health = health,
-            level = level
+            level = level,
+            score = score
+
         };
 
         string url = $"{firebaseUrl}/users/{username}.json";
         RestClient.Put(url, data, (err, res) =>
         {
             if (err != null)
+            {
                 Debug.LogError($"Save failed: {err.Message}");
+            }
             else
+            {
                 Debug.Log("Player data saved successfully.");
+                onSaved?.Invoke();
+            }
         });
     }
 
@@ -50,12 +57,10 @@ public class Firebase : MonoBehaviour
         {
             if (err != null)
             {
-                Debug.LogError($"Load failed: {err.Message}");
                 onLoaded?.Invoke(null);
             }
             else
             {
-                Debug.Log($"Loaded player: {data?.username}, health: {data?.health}, level: {data?.level}");
                 onLoaded?.Invoke(data);
             }
         });
