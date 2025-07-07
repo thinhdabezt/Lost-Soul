@@ -8,21 +8,18 @@ public class Boar : MonoBehaviour
     Animator animator;
     Damageable damageable;
 
-    public GameObject dropItemPrefab;
-
     public float walkSpeed = 1f;
     public float runSpeed = 4f;
     public float walkStopRate = 0.05f;
 
-    public DetectionZone attackZone;
+    public DetectionZone playerDetectionZone;
+    public DetectionZone cliffDetectionZone;
 
     public enum WalkableDirection
     {
         Left,
         Right
     }
-
-    private bool wasTouchingWallLastFrame = false;
 
     private Vector2 walkDirectionVector = Vector2.left;
 
@@ -87,20 +84,16 @@ public class Boar : MonoBehaviour
 
     void Update()
     {
-        HasTarget = attackZone.detectedColliders.Count > 0;
+        HasTarget = playerDetectionZone.detectedColliders.Count > 0;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        bool isTouchingWallNow = touchingDirection.IsOnWall && touchingDirection.IsGround;
-
-        if (isTouchingWallNow && !wasTouchingWallLastFrame)
+        if (touchingDirection.IsGrounded && touchingDirection.IsOnWall || cliffDetectionZone.detectedColliders.Count == 0)
         {
             FlipDirection();
         }
-
-        wasTouchingWallLastFrame = isTouchingWallNow;
 
         if (!damageable.LockVelocity)
         {
@@ -117,7 +110,7 @@ public class Boar : MonoBehaviour
             }
             else
             {
-                rb.linearVelocity = new Vector2(Mathf.Lerp(rb.linearVelocity.x, 0, walkStopRate), rb.linearVelocity.y);
+                rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
             }
         }
     }
