@@ -1,7 +1,6 @@
 using Assets.Scripts;
 using UnityEngine;
 using UnityEngine.Events;
-using static UnityEngine.Rendering.DebugUI;
 
 public class Damageable : MonoBehaviour
 {
@@ -10,7 +9,6 @@ public class Damageable : MonoBehaviour
     public UnityEvent OnPlayerDeath;
 
     public enum DamageableType { Player, Enemy }
-
     public DamageableType damageableType;
 
     Animator animator;
@@ -19,38 +17,28 @@ public class Damageable : MonoBehaviour
     private float timeSinceHit = 0;
 
     [SerializeField] private float invincibleTime = 0.25f;
-    [SerializeField] private int _maxHealth;
+    [SerializeField] private int _maxHealth = 100; 
     public int MaxHealth
     {
-        get 
-        { 
-            return _maxHealth; 
-        }
-        set 
-        { 
-            _maxHealth = Mathf.Max(0, value); 
-        } 
+        get { return _maxHealth; }
+        set { _maxHealth = Mathf.Max(0, value); }
     }
 
     [SerializeField] private int _health;
-
     public int Health
     {
-        get
-        {
-            return _health;
-        }
+        get { return _health; }
         set
         {
-            _health = Mathf.Max(0, value);
-            healthChanged?.Invoke(_health, MaxHealth);
+            _health = Mathf.Clamp(value, 0, MaxHealth);
+            healthChanged?.Invoke(_health, MaxHealth); 
+
             if (_health <= 0)
             {
                 if (damageableType == DamageableType.Player)
                 {
                     OnPlayerDeath?.Invoke();
                 }
-
                 IsAlive = false;
             }
         }
@@ -59,10 +47,7 @@ public class Damageable : MonoBehaviour
     private bool _isAlive = true;
     public bool IsAlive
     {
-        get
-        {
-            return _isAlive;
-        }
+        get { return _isAlive; }
         set
         {
             _isAlive = value;
@@ -72,27 +57,16 @@ public class Damageable : MonoBehaviour
 
     public bool LockVelocity
     {
-        get 
-        { 
-            return animator.GetBool(AnimationStrings.lockVelocity); 
-        }
-        set
-        {
-            animator.SetBool(AnimationStrings.lockVelocity, value);
-        }
+        get { return animator.GetBool(AnimationStrings.lockVelocity); }
+        set { animator.SetBool(AnimationStrings.lockVelocity, value); }
     }
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
-    }
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
+        Health = MaxHealth;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (isInvincible)
@@ -102,9 +76,12 @@ public class Damageable : MonoBehaviour
                 isInvincible = false;
                 timeSinceHit = 0f;
             }
-
             timeSinceHit += Time.deltaTime;
         }
+    }
+    public void Initialize(int startingHealth)
+    {
+        Health = startingHealth;
     }
 
     public bool TakeDamage(int damage, Vector2 knockback)
@@ -119,7 +96,6 @@ public class Damageable : MonoBehaviour
             hit?.Invoke(damage, knockback);
 
             CharacterEvents.characterDamaged?.Invoke(gameObject, damage);
-
             return true;
         }
         return false;
@@ -127,17 +103,15 @@ public class Damageable : MonoBehaviour
 
     public bool Heal(int healthRestored)
     {
-        if (IsAlive && Health != MaxHealth)
+        if (IsAlive && Health < MaxHealth)
         {
-            int maxHealth = Mathf.Max(MaxHealth - Health, 0);
-            int actualHealthRestored = Mathf.Min(maxHealth, healthRestored);
+            int maxHeal = MaxHealth - Health;
+            int actualHealthRestored = Mathf.Min(maxHeal, healthRestored);
             Health += actualHealthRestored;
 
             CharacterEvents.characterHealed?.Invoke(gameObject, actualHealthRestored);
-
             return true;
         }
-
         return false;
     }
 }

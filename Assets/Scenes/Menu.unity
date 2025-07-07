@@ -443,6 +443,7 @@ MonoBehaviour:
   usernamePanel: {fileID: 733779495}
   usernameInputField: {fileID: 1041462670}
   confirmStartButton: {fileID: 734312575}
+  firebaseManager: {fileID: 894663322}
 --- !u!1 &429096225
 GameObject:
   m_ObjectHideFlags: 0
@@ -736,7 +737,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 734312576}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 329963774}
+        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_MethodName: ConfirmStartGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &734312576
 MonoBehaviour:
   m_ObjectHideFlags: 0

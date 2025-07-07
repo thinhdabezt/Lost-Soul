@@ -28,7 +28,7 @@ public class HealthBar : MonoBehaviour
 
     void OnDisable()
     {
-        playerDamageable.healthChanged.AddListener(OnPlayerHealthChanged);
+        playerDamageable.healthChanged.RemoveListener(OnPlayerHealthChanged); 
     }
 
     // Update is called once per frame
@@ -37,7 +37,7 @@ public class HealthBar : MonoBehaviour
         
     }
 
-    private void OnPlayerHealthChanged(int health, int maxHealth)
+    public void OnPlayerHealthChanged(int health, int maxHealth)
     {
         healthSlider.value = health / (float)maxHealth;
         healthBarText.text = "HP: " + health + "/" + maxHealth;
