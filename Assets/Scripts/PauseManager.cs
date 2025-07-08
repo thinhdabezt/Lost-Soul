@@ -5,17 +5,17 @@ public class PauseManager : MonoBehaviour
 {
     public static PauseManager Instance;
 
-    public GameObject pauseMenuPanel; // Kéo PauseMenuPanel vào đây
+    public GameObject pauseMenuPanel; // Kéo Panel Pause Menu vào đây
 
     private bool isPaused = false;
 
     private void Awake()
     {
-        // Thiết lập Singleton và DontDestroyOnLoad
+        // Thiết lập Singleton và DontDestroyOnLoad để nó tồn tại qua các scene
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject); // Lệnh quan trọng
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -26,16 +26,20 @@ public class PauseManager : MonoBehaviour
 
     void Update()
     {
-        // Chỉ cho phép tạm dừng nếu không ở trong Main Menu (scene 0)
-        if (SceneManager.GetActiveScene().buildIndex != 0 && Input.GetKeyDown(KeyCode.Escape))
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+
+        if (currentSceneIndex >= 1 && currentSceneIndex <= 4)
         {
-            if (isPaused)
+            if (Input.GetKeyDown(KeyCode.Escape))
             {
-                ResumeGame();
-            }
-            else
-            {
-                PauseGame();
+                if (isPaused)
+                {
+                    ResumeGame();
+                }
+                else
+                {
+                    PauseGame();
+                }
             }
         }
     }
@@ -60,6 +64,7 @@ public class PauseManager : MonoBehaviour
         // Luôn đảm bảo thời gian chạy lại bình thường trước khi chuyển scene
         Time.timeScale = 1f;
         isPaused = false;
+        pauseMenuPanel.SetActive(false);
         SceneManager.LoadScene(0); // 0 là buildIndex của Main Menu
     }
 }
