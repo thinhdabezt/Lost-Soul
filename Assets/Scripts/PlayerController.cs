@@ -106,8 +106,6 @@ public class PlayerController : MonoBehaviour
         animator = GetComponent<Animator>();
         touchingDirection = GetComponent<RightSpriteTouchingDirections>();
         damageable = GetComponent<Damageable>();
-        DontDestroyOnLoad(gameObject);
-
         if (Instance != null && Instance != this)
         {
             Destroy(Instance.gameObject);

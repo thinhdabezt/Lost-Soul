@@ -40,26 +40,38 @@ public class MainMenu : MonoBehaviour
         usernamePanel.SetActive(true);
     }
 
-    public void ConfirmStartGame()
-    {
-        string username = usernameInputField.text;
-        confirmStartButton.interactable = false;
-        PlayerPrefs.SetString("Username", username);
-        PlayerPrefs.Save();
+   public void ConfirmStartGame()
+{
+    string username = usernameInputField.text;
+    confirmStartButton.interactable = false;
+    PlayerPrefs.SetString("Username", username);
+    PlayerPrefs.Save();
 
-        firebaseManager.LoadPlayerData(username, (loadedData) => {
-            if (loadedData == null)
+    firebaseManager.LoadPlayerData(username, (loadedData) =>
+    {
+        // Trường hợp 1: NGƯỜI CHƠI MỚI
+        if (loadedData == null)
+        {
+            // Tạo dữ liệu mặc định và vào Level 1
+            firebaseManager.SavePlayerData(username, 100, 1, 0, () =>
             {
-                firebaseManager.SavePlayerData(username, 100, 1, 0,() => {
-                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-                });
-            }
-            else
-            {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-            }
-        });
-    }
+                // Sau khi tạo user mới thành công, vào Level 1
+                SceneManager.LoadScene("Level1");
+            });
+        }
+        // Trường hợp 2: NGƯỜI CHƠI CŨ
+        else
+        {
+            Debug.Log($"Người chơi cũ tìm thấy! Đang tải Level {loadedData.level}...");
+            
+            // Lấy level đã lưu và tạo tên scene tương ứng
+            string sceneToLoad = "Level" + loadedData.level;
+
+            // Tải scene tương ứng với level đã lưu
+            SceneManager.LoadScene(sceneToLoad);
+        }
+    });
+}
 
     public void BackToMainMenu()
     {
