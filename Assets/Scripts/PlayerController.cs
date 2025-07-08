@@ -6,8 +6,8 @@ using UnityEngine.Splines;
 
 public class PlayerController : MonoBehaviour
 {
-    private static PlayerController instance;
-
+    public static PlayerController Instance { get; private set; }
+    public int CurrentLevel { get; private set; } = 1;
     Rigidbody2D rb;
     Animator animator;
     RightSpriteTouchingDirections touchingDirection;
@@ -18,6 +18,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float walkSpeed = 4f;
     [SerializeField] float runSpeed = 7f;
     [SerializeField] float jumpForce = 7f;
+
+    private Firebase firebaseManager;
+    private ScoreManager scoreManager;
 
     public float CurrentSpeed
     {
@@ -103,17 +106,72 @@ public class PlayerController : MonoBehaviour
         animator = GetComponent<Animator>();
         touchingDirection = GetComponent<RightSpriteTouchingDirections>();
         damageable = GetComponent<Damageable>();
-        DontDestroyOnLoad(gameObject);
-
-        if (instance != null && instance != this)
+        if (Instance != null && Instance != this)
         {
-            Destroy(instance.gameObject);
+            Destroy(Instance.gameObject);
             return;
         }
 
-        instance = this;
+        Instance = this;
         DontDestroyOnLoad(gameObject);
     }
+    // --- SỬ DỤNG OnEnable VÀ OnDisable ĐỂ QUẢN LÝ SỰ KIỆN ---
+    private void OnEnable()
+    {
+        // Đăng ký lắng nghe sự kiện khi một scene được tải
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        // Hủy đăng ký để tránh lỗi
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+    // --- HÀM NÀY SẼ ĐƯỢC GỌI MỖI KHI MỘT SCENE MỚI ĐƯỢC TẢI XONG ---
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        // Khi scene mới được tải, tìm các manager trong scene đó
+        FindManagers();
+        // Bắt đầu tải dữ liệu người chơi
+        LoadDataFromFirebase();
+    }
+
+    private void FindManagers()
+    {
+        firebaseManager = FindAnyObjectByType<Firebase>(); 
+        scoreManager = ScoreManager.Instance;
+    }
+
+    private void LoadDataFromFirebase()
+    {
+        if (firebaseManager == null || scoreManager == null || damageable == null)
+        {
+            Debug.LogWarning("Bỏ qua tải dữ liệu vì thiếu Manager.");
+            return;
+        }
+
+        string username = PlayerPrefs.GetString("Username", "");
+        if (string.IsNullOrEmpty(username)) return;
+
+        firebaseManager.LoadPlayerData(username, (loadedData) =>
+        {
+            if (loadedData == null)
+            {
+                Debug.Log("Người chơi mới, sử dụng dữ liệu mặc định.");
+                damageable.Initialize(100);
+                scoreManager.SetScore(0);
+                CurrentLevel = 1; // Level mặc định
+            }
+            else
+            {
+                Debug.Log($"Tải dữ liệu thành công: Máu={loadedData.health}, Điểm={loadedData.score}, Level={loadedData.level}");
+                damageable.Initialize(loadedData.health);
+                scoreManager.SetScore(loadedData.score);
+                CurrentLevel = loadedData.level; // Lấy level từ Firebase
+            }
+        });
+    }
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created  
     void Start()

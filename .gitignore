@@ -19,6 +19,10 @@
 # Recordings can get excessive in size
 /[Rr]ecordings/
 
+# Environment variables
+.env
+.env.local
+.env.production
 # Uncomment this line if you wish to ignore the asset store tools plugin
 # /[Aa]ssets/AssetStoreTools*
 
@@ -73,3 +77,5 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
+
+Assets/Resources/firebase_config.json

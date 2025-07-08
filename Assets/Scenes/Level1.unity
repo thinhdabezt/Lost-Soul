@@ -6610,6 +6610,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 1739773717}
   followTarget: {fileID: 2594379547589224302, guid: dafa46a2fab012f4eb75b66179d917b4, type: 3}
+--- !u!1 &988951079 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1134713149320722076, guid: db6d3de85c247ed4a8391c0a19f922b3, type: 3}
+  m_PrefabInstance: {fileID: 7584354083164186186}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1078292375
 GameObject:
   m_ObjectHideFlags: 0
@@ -6730,6 +6735,7 @@ GameObject:
   - component: {fileID: 1287683522}
   - component: {fileID: 1287683521}
   - component: {fileID: 1287683520}
+  - component: {fileID: 1287683523}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -6798,6 +6804,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1287683523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1287683519}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9827561c32817134f941f6ddff1a4b12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1363921650
 GameObject:
   m_ObjectHideFlags: 0
@@ -17924,9 +17942,21 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1028322045271410992, guid: dafa46a2fab012f4eb75b66179d917b4, type: 3}
+      propertyPath: healthChanged.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1028322045271410992, guid: dafa46a2fab012f4eb75b66179d917b4, type: 3}
       propertyPath: OnPlayerDeath.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1811082644}
+    - target: {fileID: 1028322045271410992, guid: dafa46a2fab012f4eb75b66179d917b4, type: 3}
+      propertyPath: healthChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 988951079}
+    - target: {fileID: 1028322045271410992, guid: dafa46a2fab012f4eb75b66179d917b4, type: 3}
+      propertyPath: healthChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1415133629894060215, guid: dafa46a2fab012f4eb75b66179d917b4, type: 3}
       propertyPath: m_Name
       value: Player

@@ -81,6 +81,11 @@ public class ScoreManager : MonoBehaviour
         score = 0;
         UpdateScoreText();
     }
+    public void SetScore(int initialScore)
+    {
+        score = initialScore;
+        UpdateScoreText();
+    }
 
     public IEnumerator PopScore()
     {
