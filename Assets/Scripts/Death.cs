@@ -5,7 +5,7 @@ using UnityEngine.Events;
 public class Death : MonoBehaviour
 {
     Rigidbody2D rb;
-    RightSpriteTouchingDirections touchingDirections;
+    TouchingDirections touchingDirections;
     Animator animator;
     Damageable damageable;
 
@@ -114,7 +114,7 @@ public class Death : MonoBehaviour
     public void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        touchingDirections = GetComponent<RightSpriteTouchingDirections>();
+        touchingDirections = GetComponent<TouchingDirections>();
         animator = GetComponent<Animator>();
         damageable = GetComponent<Damageable>();
     }

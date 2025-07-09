@@ -42,6 +42,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Decoration
+    uniqueID: 1169442409
+    locked: 0
   - name: Monster
     uniqueID: 3978241723
     locked: 0

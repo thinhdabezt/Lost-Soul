@@ -4,7 +4,7 @@ using UnityEngine;
 public class Boar : MonoBehaviour
 {
     Rigidbody2D rb;
-    LeftSpriteTouchingDirections touchingDirection;
+    TouchingDirections touchingDirection;
     Animator animator;
     Damageable damageable;
 
@@ -71,15 +71,9 @@ public class Boar : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        touchingDirection = GetComponent<LeftSpriteTouchingDirections>();
+        touchingDirection = GetComponent<TouchingDirections>();
         animator = GetComponent<Animator>();
         damageable = GetComponent<Damageable>();
-    }
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-
     }
 
     void Update()

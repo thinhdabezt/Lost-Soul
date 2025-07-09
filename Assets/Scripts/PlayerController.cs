@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     public int CurrentLevel { get; private set; } = 1;
     Rigidbody2D rb;
     Animator animator;
-    RightSpriteTouchingDirections touchingDirection;
+    TouchingDirections touchingDirection;
     Damageable damageable;
 
     Vector2 moveInput;
@@ -104,7 +104,7 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        touchingDirection = GetComponent<RightSpriteTouchingDirections>();
+        touchingDirection = GetComponent<TouchingDirections>();
         damageable = GetComponent<Damageable>();
         if (Instance != null && Instance != this)
         {
@@ -170,19 +170,6 @@ public class PlayerController : MonoBehaviour
                 CurrentLevel = loadedData.level; // Lấy level từ Firebase
             }
         });
-    }
-
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created  
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame  
-    void Update()
-    {
-
     }
 
     private void FixedUpdate()

@@ -4,7 +4,7 @@ using UnityEngine;
 public class Mushroom : MonoBehaviour
 {
     Rigidbody2D rb;
-    LeftSpriteTouchingDirections touchingDirection;
+    TouchingDirections touchingDirection;
     Animator animator;
     Damageable damageable;
 
@@ -96,7 +96,7 @@ public class Mushroom : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        touchingDirection = GetComponent<LeftSpriteTouchingDirections>();
+        touchingDirection = GetComponent<TouchingDirections>();
         animator = GetComponent<Animator>();
         damageable = GetComponent<Damageable>();
     }
@@ -128,11 +128,6 @@ public class Mushroom : MonoBehaviour
         }
 
         wasTouchingWallLastFrame = isTouchingWallNow;
-
-        //if (touchingDirection.IsGround && touchingDirection.IsOnWall || cliffDetectionZone.detectedColliders.Count > 0)
-        //{
-        //    FlipDirection();
-        //}
 
         if (!damageable.LockVelocity)
         {

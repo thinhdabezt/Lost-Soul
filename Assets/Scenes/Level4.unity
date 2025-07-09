@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 49722058}
   - component: {fileID: 49722057}
   - component: {fileID: 49722060}
-  - component: {fileID: 49722059}
+  - component: {fileID: 49722061}
   m_Layer: 10
   m_Name: Death
   m_TagString: Untagged
@@ -185,7 +185,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -316725573
-  m_SortingLayer: 1
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 1405735560, guid: 2f094bf167aec144fb4379991ae96317, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -351,35 +351,6 @@ Animation:
   m_AnimatePhysics: 0
   m_UpdateMode: 0
   m_CullingType: 0
---- !u!114 &49722059
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 49722051}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 650bd7bb5c6a69043a286223d185deda, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  contactFilter:
-    useTriggers: 0
-    useLayerMask: 1
-    useDepth: 0
-    useOutsideDepth: 0
-    useNormalAngle: 0
-    useOutsideNormalAngle: 0
-    layerMask:
-      serializedVersion: 2
-      m_Bits: 64
-    minDepth: 0
-    maxDepth: 0
-    minNormalAngle: 0
-    maxNormalAngle: 0
-  groundCheckDistance: 0.1
-  wallCheckDistance: 0.2
-  ceilingCheckDistance: 0.05
 --- !u!114 &49722060
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -405,6 +376,36 @@ MonoBehaviour:
   invincibleTime: 0.25
   _maxHealth: 250
   _health: 250
+--- !u!114 &49722061
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 49722051}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8501bac30ccd23147bac186eda10d709, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  contactFilter:
+    useTriggers: 0
+    useLayerMask: 1
+    useDepth: 0
+    useOutsideDepth: 0
+    useNormalAngle: 0
+    useOutsideNormalAngle: 0
+    layerMask:
+      serializedVersion: 2
+      m_Bits: 64
+    minDepth: 0
+    maxDepth: 0
+    minNormalAngle: 0
+    maxNormalAngle: 0
+  groundCheckDistance: 0.1
+  wallCheckDistance: 0.2
+  ceilingCheckDistance: 0.05
+  facingMode: 1
 --- !u!1001 &72881536
 PrefabInstance:
   m_ObjectHideFlags: 0
