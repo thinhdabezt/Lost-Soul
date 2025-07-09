@@ -200,8 +200,8 @@ GameObject:
   - component: {fileID: 1520642269552453723}
   - component: {fileID: 1573455252817343747}
   - component: {fileID: 5700947140024083190}
-  - component: {fileID: 52634760097579957}
   - component: {fileID: 3171585245904349321}
+  - component: {fileID: 1158980861950498981}
   m_Layer: 10
   m_Name: Boar
   m_TagString: Untagged
@@ -268,7 +268,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -316725573
-  m_SortingLayer: 1
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 5556705028120324157, guid: 119d29b03776e124bbecd79afe1ad967, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -431,10 +431,14 @@ MonoBehaviour:
   healthChanged:
     m_PersistentCalls:
       m_Calls: []
+  OnPlayerDeath:
+    m_PersistentCalls:
+      m_Calls: []
+  damageableType: 0
   invincibleTime: 0.25
   _maxHealth: 60
   _health: 60
---- !u!114 &52634760097579957
+--- !u!114 &3171585245904349321
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -443,7 +447,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 8256329008264000491}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73c9f52290711514f832ff8d8369c772, type: 3}
+  m_Script: {fileID: 11500000, guid: 79623de1b219f924c8663f978a187b70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dropPrefab: {fileID: 3539801219993389521, guid: 08e112674949c8e4593eab6c5da87372, type: 3}
+--- !u!114 &1158980861950498981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8256329008264000491}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8501bac30ccd23147bac186eda10d709, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   contactFilter:
@@ -461,18 +478,6 @@ MonoBehaviour:
     minNormalAngle: 0
     maxNormalAngle: 0
   groundCheckDistance: 0.1
-  wallCheckDistance: 0.5
+  wallCheckDistance: 0.2
   ceilingCheckDistance: 0.05
---- !u!114 &3171585245904349321
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8256329008264000491}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 79623de1b219f924c8663f978a187b70, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dropPrefab: {fileID: 3539801219993389521, guid: 08e112674949c8e4593eab6c5da87372, type: 3}
+  facingMode: 0
