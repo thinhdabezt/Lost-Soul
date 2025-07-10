@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5189312081266627707}
   - component: {fileID: 9158267489006038150}
+  - component: {fileID: 2918238709379744687}
   m_Layer: 0
   m_Name: UIManager
   m_TagString: Untagged
@@ -48,3 +49,15 @@ MonoBehaviour:
   damageTextPrefab: {fileID: 7520263323505952542, guid: f93cd558e17650e4c902d305f19654ca, type: 3}
   messageTextPrefab: {fileID: 7520263323505952542, guid: 152f64f36026bc841977b5dc1ab6b472, type: 3}
   canvas: {fileID: 0}
+--- !u!114 &2918238709379744687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1510705174378769041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9827561c32817134f941f6ddff1a4b12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

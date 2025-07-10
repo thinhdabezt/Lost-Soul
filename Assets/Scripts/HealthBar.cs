@@ -4,6 +4,8 @@ using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
+    public static HealthBar Instance;
+
     public TMP_Text healthBarText;
     public Slider healthSlider;
 
@@ -14,9 +16,19 @@ public class HealthBar : MonoBehaviour
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         playerDamageable = player.GetComponent<Damageable>();
     }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+
         healthSlider.value = playerDamageable.Health / (float)playerDamageable.MaxHealth;
         healthBarText.text = "HP: " + playerDamageable.Health + "/" + playerDamageable.MaxHealth;
     }
@@ -29,12 +41,6 @@ public class HealthBar : MonoBehaviour
     void OnDisable()
     {
         playerDamageable.healthChanged.RemoveListener(OnPlayerHealthChanged); 
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void OnPlayerHealthChanged(int health, int maxHealth)

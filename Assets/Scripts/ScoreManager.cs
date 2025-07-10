@@ -1,17 +1,29 @@
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class ScoreManager : MonoBehaviour
 {
+    [System.Serializable]
+    public class LevelScoreConfig
+    {
+        public string sceneName;
+        public int maxScore;
+    }
+
+    [SerializeField] private List<LevelScoreConfig> levelConfigs;
+
     public static ScoreManager Instance;
 
     public int score = 0;
-    [SerializeField] public int maxScore;
+    public int maxScore;
 
     public TMP_Text scoreText;
     public TMP_Text maxScoreText;
+    public TMP_Text level4Text;
 
     private Coroutine maxScorePopRoutine;
     [SerializeField] private float duration;
@@ -33,13 +45,29 @@ public class ScoreManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        string sceneName = SceneManager.GetActiveScene().name;
+        foreach (var config in levelConfigs)
+        {
+            if (config.sceneName == sceneName)
+            {
+                maxScore = config.maxScore;
+                break;
+            }
+        }
+
         UpdateScoreText();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (score >= maxScore && !maxScoreText.enabled)
+        if (SceneManager.GetActiveScene().name == "Level4")
+        {
+            scoreText.enabled = false;
+            maxScoreText.enabled = false;
+            level4Text.enabled = true;
+        }
+        else if(score >= maxScore && !maxScoreText.enabled)
         {
             scoreText.enabled = false;
             maxScoreText.enabled = true;

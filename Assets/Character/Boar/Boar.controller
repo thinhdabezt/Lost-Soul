@@ -127,7 +127,7 @@ AnimatorStateTransition:
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
-  m_CanTransitionToSelf: 1
+  m_CanTransitionToSelf: 0
 --- !u!1107 &-5641324689218728199
 AnimatorStateMachine:
   serializedVersion: 6
@@ -399,7 +399,7 @@ MonoBehaviour:
   updateOnStateMachine: 0
   valueOnEnter: 1
   valueOnExit: 0
---- !u!114 &3439626803935712841
+--- !u!114 &4447420556393928710
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -415,7 +415,7 @@ MonoBehaviour:
   updateOnState: 1
   updateOnStateMachine: 0
   valueOnEnter: 0
-  valueOnExit: 1
+  valueOnExit: 0
 --- !u!1102 &5247799129272162603
 AnimatorState:
   serializedVersion: 6
@@ -455,8 +455,8 @@ AnimatorState:
   m_CycleOffset: 0
   m_Transitions: []
   m_StateMachineBehaviours:
-  - {fileID: 3439626803935712841}
   - {fileID: 2020832829751489762}
+  - {fileID: 4447420556393928710}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1

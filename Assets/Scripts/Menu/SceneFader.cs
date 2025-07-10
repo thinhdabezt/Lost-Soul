@@ -28,12 +28,6 @@ public class SceneFader : MonoBehaviour
         StartCoroutine(Fade(0));
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void FadeToScene(int sceneIndex)
     {
         StartCoroutine(FadeAndLoadScene(sceneIndex));

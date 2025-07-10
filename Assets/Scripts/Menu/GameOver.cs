@@ -64,11 +64,16 @@ public class GameOver : MonoBehaviour
 
     public void RestartGame()
     {
+        //gameObject.SetActive(false);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void OpenMainMenu()
     {
+        gameObject.SetActive(false);
+        ScoreManager.Instance.scoreText.enabled = false;
+        HealthBar.Instance.healthBarText.enabled = false;
+        HealthBar.Instance.healthSlider.gameObject.SetActive(false);
         SceneManager.LoadScene(0);
     }
 }

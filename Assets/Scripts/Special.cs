@@ -3,7 +3,7 @@ using UnityEngine;
 public class Special : MonoBehaviour
 {
     public int damage = 25;
-    public float speed = 4f;
+    public float speed = 9f;
     public Vector2 knockback = new Vector2(3f, 1f);
 
     Rigidbody2D rb;
