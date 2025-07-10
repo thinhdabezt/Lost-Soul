@@ -71,7 +71,22 @@ public class MainMenu : MonoBehaviour
             SceneManager.LoadScene(sceneToLoad);
         }
     });
-}
+        if (ScoreManager.Instance != null)
+        {
+            if (!ScoreManager.Instance.scoreText.enabled)
+            {
+                ScoreManager.Instance.scoreText.enabled = true;
+            }
+        }
+        if (HealthBar.Instance != null)
+        {
+            if (!HealthBar.Instance.healthBarText.enabled && !HealthBar.Instance.healthSlider.IsActive())
+            {
+                HealthBar.Instance.healthBarText.enabled = true;
+                HealthBar.Instance.healthSlider.gameObject.SetActive(true);
+            }
+        }
+    }
 
     public void BackToMainMenu()
     {

@@ -37,18 +37,6 @@ public class UIManager : MonoBehaviour
         CharacterEvents.characterHealed -= (Healed);
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void TookDamage(GameObject character, int damageReceived)
     {
         Vector3 spawnPosition = Camera.main.WorldToScreenPoint(character.transform.position);

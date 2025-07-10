@@ -178,8 +178,8 @@ MonoBehaviour:
   hit:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Goblin, Assembly-CSharp
+      - m_Target: {fileID: 4567144121194255202}
+        m_TargetAssemblyTypeName: BasicMonsterAI, Assembly-CSharp
         m_MethodName: OnHit
         m_Mode: 0
         m_Arguments:
@@ -194,6 +194,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   OnPlayerDeath:
+    m_PersistentCalls:
+      m_Calls: []
+  OnBossDeath:
     m_PersistentCalls:
       m_Calls: []
   damageableType: 0
@@ -293,10 +296,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac82e18e248c58d4395b533ee503d6f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeed: 2
+  walkSpeed: 3
   walkAcceleration: 100
-  maxSpeed: 3
-  walkStopRate: 0.1
+  maxSpeed: 4
+  walkStopRate: 0.05
   isConstantSpeed: 0
   attackZone: {fileID: 4867834937526146014}
   cliffZone: {fileID: 7593555932793279090}

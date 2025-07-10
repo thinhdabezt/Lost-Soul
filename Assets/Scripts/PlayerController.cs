@@ -2,110 +2,83 @@ using Assets.Scripts;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
-using UnityEngine.Splines;
 
 public class PlayerController : MonoBehaviour
 {
     public static PlayerController Instance { get; private set; }
     public int CurrentLevel { get; private set; } = 1;
-    Rigidbody2D rb;
-    Animator animator;
-    TouchingDirections touchingDirection;
-    Damageable damageable;
 
-    Vector2 moveInput;
-
+    [Header("Movement")]
     [SerializeField] float walkSpeed = 4f;
     [SerializeField] float runSpeed = 7f;
     [SerializeField] float jumpForce = 7f;
 
-    private Firebase firebaseManager;
-    private ScoreManager scoreManager;
+    [Header("Special Attack")]
+    [SerializeField] private GameObject specialAttackPrefab;
+    [SerializeField] private Transform specialAttackSpawnPoint;
+    [SerializeField] private float specialAttackCooldownTime = 5f;
+    private float specialAttackCooldown;
 
-    public float CurrentSpeed
+    private Rigidbody2D rb;
+    private Animator animator;
+    private TouchingDirections touchingDirection;
+    private Damageable damageable;
+    private ScoreManager scoreManager;
+    private Firebase firebaseManager;
+
+    private Vector2 moveInput;
+    private bool _isMoving = false;
+    private bool _isRunning = false;
+    private bool _isFacingRight = true;
+
+    public bool CanMove => animator.GetBool(AnimationStrings.canMove);
+    public bool IsAlive => animator.GetBool(AnimationStrings.isAlive);
+    public float AttackCooldown
     {
-        get
-        {
-            if (CanMove)
-            {
-                if (IsMoving && !touchingDirection.IsOnWall)
-                {
-                    return IsRunning ? runSpeed : walkSpeed;
-                }
-                else
-                {
-                    return 0f;
-                }
-            }
-            else
-            {
-                return 0f;
-            }
-        }
+        get => animator.GetFloat(AnimationStrings.attackCooldown);
+        set => animator.SetFloat(AnimationStrings.attackCooldown, Mathf.Max(value, 0));
     }
 
-    private bool _isMoving = false;
+    public float CurrentSpeed =>
+        CanMove && IsMoving && !touchingDirection.IsOnWall
+            ? (_isRunning ? runSpeed : walkSpeed)
+            : 0f;
+
     public bool IsMoving
     {
-        get { return _isMoving; }
+        get => _isMoving;
         set
         {
             if (_isMoving != value)
-            {
                 animator.SetBool(AnimationStrings.isMoving, value);
-            }
             _isMoving = value;
         }
     }
 
-    private bool _isRunning = false;
     public bool IsRunning
     {
-        get { return _isRunning; }
+        get => _isRunning;
         set
         {
             if (_isRunning != value)
-            {
                 animator.SetBool(AnimationStrings.isRunning, value);
-            }
             _isRunning = value;
         }
     }
 
-
-
-    private bool _isFacingRight = true;
     public bool IsFacingRight
     {
-        get { return _isFacingRight; }
+        get => _isFacingRight;
         set
         {
             if (_isFacingRight != value)
-            {
-                transform.localScale *= new Vector2(-1, 1);
-            }
-
+                transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
             _isFacingRight = value;
         }
     }
 
-    public bool CanMove
-    {
-        get { return animator.GetBool(AnimationStrings.canMove); }
-    }
-
-    public bool IsAlive
-    {
-        get { return animator.GetBool(AnimationStrings.isAlive); }
-    }
-
-
     private void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
-        touchingDirection = GetComponent<TouchingDirections>();
-        damageable = GetComponent<Damageable>();
         if (Instance != null && Instance != this)
         {
             Destroy(Instance.gameObject);
@@ -114,62 +87,56 @@ public class PlayerController : MonoBehaviour
 
         Instance = this;
         DontDestroyOnLoad(gameObject);
-    }
-    // --- SỬ DỤNG OnEnable VÀ OnDisable ĐỂ QUẢN LÝ SỰ KIỆN ---
-    private void OnEnable()
-    {
-        // Đăng ký lắng nghe sự kiện khi một scene được tải
-        SceneManager.sceneLoaded += OnSceneLoaded;
+
+        rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+        touchingDirection = GetComponent<TouchingDirections>();
+        damageable = GetComponent<Damageable>();
     }
 
-    private void OnDisable()
-    {
-        // Hủy đăng ký để tránh lỗi
-        SceneManager.sceneLoaded -= OnSceneLoaded;
-    }
-    // --- HÀM NÀY SẼ ĐƯỢC GỌI MỖI KHI MỘT SCENE MỚI ĐƯỢC TẢI XONG ---
+    private void OnEnable() => SceneManager.sceneLoaded += OnSceneLoaded;
+    private void OnDisable() => SceneManager.sceneLoaded -= OnSceneLoaded;
+
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        // Khi scene mới được tải, tìm các manager trong scene đó
-        FindManagers();
-        // Bắt đầu tải dữ liệu người chơi
-        LoadDataFromFirebase();
-    }
-
-    private void FindManagers()
-    {
-        firebaseManager = FindAnyObjectByType<Firebase>(); 
+        firebaseManager = FindAnyObjectByType<Firebase>();
         scoreManager = ScoreManager.Instance;
+        LoadDataFromFirebase();
     }
 
     private void LoadDataFromFirebase()
     {
         if (firebaseManager == null || scoreManager == null || damageable == null)
         {
-            Debug.LogWarning("Bỏ qua tải dữ liệu vì thiếu Manager.");
+            Debug.LogWarning("Missing manager reference.");
             return;
         }
 
         string username = PlayerPrefs.GetString("Username", "");
         if (string.IsNullOrEmpty(username)) return;
 
-        firebaseManager.LoadPlayerData(username, (loadedData) =>
+        firebaseManager.LoadPlayerData(username, data =>
         {
-            if (loadedData == null)
+            if (data == null)
             {
-                Debug.Log("Người chơi mới, sử dụng dữ liệu mặc định.");
+                Debug.Log("New player - using defaults.");
                 damageable.Initialize(100);
                 scoreManager.SetScore(0);
-                CurrentLevel = 1; // Level mặc định
+                CurrentLevel = 1;
             }
             else
             {
-                Debug.Log($"Tải dữ liệu thành công: Máu={loadedData.health}, Điểm={loadedData.score}, Level={loadedData.level}");
-                damageable.Initialize(loadedData.health);
-                scoreManager.SetScore(loadedData.score);
-                CurrentLevel = loadedData.level; // Lấy level từ Firebase
+                damageable.Initialize(data.health);
+                scoreManager.SetScore(data.score);
+                CurrentLevel = data.level;
             }
         });
+    }
+
+    private void Update()
+    {
+        AttackCooldown -= Time.deltaTime;
+        specialAttackCooldown -= Time.deltaTime;
     }
 
     private void FixedUpdate()
@@ -189,7 +156,6 @@ public class PlayerController : MonoBehaviour
         if (IsAlive)
         {
             SetFacingDirection(moveInput);
-
             IsMoving = moveInput.x != 0;
         }
     }
@@ -202,36 +168,49 @@ public class PlayerController : MonoBehaviour
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
         }
     }
+
     public void OnRunning(InputAction.CallbackContext context)
     {
         if (context.started && touchingDirection.IsGrounded)
-        {
             IsRunning = true;
-        }
         else if (context.canceled)
-        {
             IsRunning = false;
-        }
     }
 
     public void OnAttack(InputAction.CallbackContext context)
     {
-        if (context.started)
+        if (context.started && AttackCooldown <= 0)
         {
             animator.SetTrigger(AnimationStrings.attackTrigger);
+            AttackCooldown = 1.2f; // adjust as needed
+        }
+    }
+
+    public void OnSpecialAttack(InputAction.CallbackContext context)
+    {
+        if (context.started && specialAttackCooldown <= 0)
+        {
+            animator.SetTrigger(AnimationStrings.specialTrigger);
+            //SpawnSpecialAttack();
+            specialAttackCooldown = specialAttackCooldownTime;
+        }
+    }
+
+    private void SpawnSpecialAttack()
+    {
+        if (specialAttackPrefab != null && specialAttackSpawnPoint != null)
+        {
+            GameObject attack = Instantiate(specialAttackPrefab, specialAttackSpawnPoint.position, Quaternion.identity);
+            attack.transform.localScale = new Vector3(IsFacingRight ? 2 : -2, 2, 2); // face correct direction
         }
     }
 
     private void SetFacingDirection(Vector2 direction)
     {
         if (direction.x > 0 && !IsFacingRight)
-        {
             IsFacingRight = true;
-        }
         else if (direction.x < 0 && IsFacingRight)
-        {
             IsFacingRight = false;
-        }
     }
 
     public void OnHit(int damage, Vector2 knockback)

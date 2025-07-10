@@ -7,8 +7,9 @@ public class Damageable : MonoBehaviour
     public UnityEvent<int, Vector2> hit;
     public UnityEvent<int, int> healthChanged;
     public UnityEvent OnPlayerDeath;
+    public UnityEvent OnBossDeath;
 
-    public enum DamageableType { Player, Enemy }
+    public enum DamageableType { Player, Enemy, Boss }
     public DamageableType damageableType;
 
     Animator animator;
@@ -38,6 +39,10 @@ public class Damageable : MonoBehaviour
                 if (damageableType == DamageableType.Player)
                 {
                     OnPlayerDeath?.Invoke();
+                }
+                else if (damageableType == DamageableType.Boss)
+                {
+                    OnBossDeath?.Invoke();
                 }
                 IsAlive = false;
             }

@@ -5,12 +5,6 @@ public class HealthPickup : MonoBehaviour
 {
     public int healthAmount = 20;
     public Vector3 spinRotationSpeed = new Vector3(0, 180, 0);
-    
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
