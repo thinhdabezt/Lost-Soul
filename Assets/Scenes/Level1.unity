@@ -18362,12 +18362,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4812458264112590043, guid: db6d3de85c247ed4a8391c0a19f922b3, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5095172436262289659, guid: db6d3de85c247ed4a8391c0a19f922b3, type: 3}
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 5201204695758128866, guid: db6d3de85c247ed4a8391c0a19f922b3, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: db6d3de85c247ed4a8391c0a19f922b3, type: 3}

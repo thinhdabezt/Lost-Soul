@@ -74,6 +74,13 @@ public class PauseManager : MonoBehaviour
     // HÀM QUAN TRỌNG: LƯU VÀ THOÁT
     public void SaveAndQuitToMenu()
     {
+        //gameObject.SetActive(false);
+        ScoreManager.Instance.level4Text.enabled = false;
+        ScoreManager.Instance.scoreText.enabled = false;
+        ScoreManager.Instance.maxScoreText.enabled = false;
+        HealthBar.Instance.healthBarText.enabled = false;
+        HealthBar.Instance.healthSlider.gameObject.SetActive(false);
+
         Time.timeScale = 1f; // Chạy lại thời gian
 
         if (firebaseManager == null || playerController == null || scoreManager == null)

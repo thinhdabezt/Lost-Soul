@@ -767,9 +767,9 @@ MonoBehaviour:
   - sceneName: Level1
     maxScore: 7
   - sceneName: Level2
-    maxScore: 8
-  - sceneName: Level3
     maxScore: 9
+  - sceneName: Level3
+    maxScore: 8
   score: 0
   maxScore: 1
   scoreText: {fileID: 3243045693177622531}

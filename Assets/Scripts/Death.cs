@@ -1,117 +1,89 @@
 using Assets.Scripts;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class Death : MonoBehaviour
 {
-    Rigidbody2D rb;
-    TouchingDirections touchingDirections;
-    Animator animator;
-    Damageable damageable;
+    [Header("Components")]
+    private Rigidbody2D rb;
+    private TouchingDirections touchingDirections;
+    private Animator animator;
+    private Damageable damageable;
 
+    [Header("Detection")]
     public DetectionZone attackZone;
     public DetectionZone playerZone;
     public DetectionZone specialZone;
     public DetectionZone cliffZone;
-
     public LayerMask whatIsPlayer;
-    public Transform playerCheck;
-    public float playerCheckDistance = 10f;
 
+    [Header("Movement")]
     public float walkAcceleration = 100f;
     public float maxSpeed = 3f;
     public float walkStopRate = 0.1f;
-    [SerializeField] private float specialCooldown = 4f;
-    [SerializeField] private float lastSpecialTime = 0;
+
+    [Header("Special Attack")]
     public GameObject specialAttackPrefab;
     public Transform specialAttackSpawnPoint;
+    [SerializeField] private float specialCooldown = 4f;
+    private float lastSpecialTime = -999f;
 
-    [SerializeField] private Transform targetPlayer;
+    private Transform targetPlayer;
 
-    public enum WalkableDirection
-    {
-        Left,
-        Right
-    }
-
-    private WalkableDirection _walkDirection;
-
+    public enum WalkableDirection { Left, Right }
+    private WalkableDirection _walkDirection = WalkableDirection.Right;
     private Vector2 walkDirectionVector = Vector2.right;
 
     public WalkableDirection WalkDirection
     {
-        get
-        {
-            return _walkDirection;
-        }
+        get => _walkDirection;
         set
         {
             if (_walkDirection != value)
             {
-                Vector3 localScale = gameObject.transform.localScale;
-                if (value == WalkableDirection.Right)
-                    localScale.x = Mathf.Abs(localScale.x);
-                else
-                    localScale.x = -Mathf.Abs(localScale.x);
-                gameObject.transform.localScale = localScale;
+                Vector3 scale = transform.localScale;
+                scale.x = Mathf.Abs(scale.x) * (value == WalkableDirection.Right ? 1 : -1);
+                transform.localScale = scale;
 
-                walkDirectionVector = (value == WalkableDirection.Right) ? Vector2.right : Vector2.left;
+                walkDirectionVector = value == WalkableDirection.Right ? Vector2.right : Vector2.left;
             }
             _walkDirection = value;
         }
     }
 
-    public bool _isMoving = false;
+    private bool isMoving;
     public bool IsMoving
     {
-        get
+        get => isMoving;
+        set
         {
-            return _isMoving;
-        }
-
-        private set
-        {
-            _isMoving = value;
+            isMoving = value;
             animator.SetBool(AnimationStrings.isMoving, value);
         }
     }
 
-    public bool _hasTarget = false;
+    private bool hasTarget;
     public bool HasTarget
     {
-        get
+        get => hasTarget;
+        set
         {
-            return _hasTarget;
-        }
-
-        private set
-        {
-            _hasTarget = value;
+            hasTarget = value;
             animator.SetBool(AnimationStrings.hasTarget, value);
         }
     }
 
-    public bool CanMove
+    private bool CanMove => animator.GetBool(AnimationStrings.canMove);
+
+    private float AttackCooldown
     {
-        get
-        {
-            return animator.GetBool(AnimationStrings.canMove);
-        }
+        get => animator.GetFloat(AnimationStrings.attackCooldown);
+        set => animator.SetFloat(AnimationStrings.attackCooldown, Mathf.Max(0, value));
     }
 
-    public float AttackCooldown
-    {
-        get
-        {
-            return animator.GetFloat(AnimationStrings.attackCooldown);
-        }
-        private set
-        {
-            animator.SetFloat(AnimationStrings.attackCooldown, Mathf.Max(value, 0));
-        }
-    }
+    private bool IsNearCliff => cliffZone != null && cliffZone.detectedColliders.Count == 0;
+    private bool CanUseSpecial => Time.time >= lastSpecialTime + specialCooldown;
 
-    public void Awake()
+    private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         touchingDirections = GetComponent<TouchingDirections>();
@@ -119,44 +91,11 @@ public class Death : MonoBehaviour
         damageable = GetComponent<Damageable>();
     }
 
-    void FixedUpdate()
-    {
-        if (touchingDirections.IsOnWall && touchingDirections.IsGrounded || cliffZone.detectedColliders.Count == 0)
-        {
-            FlipDirection();
-        }
-
-        if (!damageable.LockVelocity && touchingDirections.IsGrounded)
-        {
-            if (CanMove)
-            {
-                // If player detected, chase them
-                if (targetPlayer != null)
-                {
-                    float direction = Mathf.Sign(targetPlayer.position.x - transform.position.x);
-                    WalkDirection = direction > 0 ? WalkableDirection.Right : WalkableDirection.Left;
-                    rb.linearVelocity = new Vector2(Mathf.Clamp(rb.linearVelocity.x + (walkAcceleration * direction * Time.fixedDeltaTime), -maxSpeed, maxSpeed), rb.linearVelocity.y);
-                    IsMoving = Mathf.Abs(rb.linearVelocity.x) > 0.1f;
-                }
-                else
-                {
-                    rb.linearVelocity = new Vector2(Mathf.Clamp(rb.linearVelocity.x + (walkAcceleration * walkDirectionVector.x * Time.fixedDeltaTime), -maxSpeed, maxSpeed), rb.linearVelocity.y);
-                    IsMoving = Mathf.Abs(rb.linearVelocity.x) > 0.1f;
-                }
-            }
-            else
-            {
-                rb.linearVelocity = new Vector2(Mathf.Lerp(rb.linearVelocity.x, 0, walkStopRate), rb.linearVelocity.y);
-                IsMoving = false;
-            }
-        }
-    }
-
-    bool cooldownReady => Time.time >= lastSpecialTime + specialCooldown;
-
     private void Update()
     {
+        // Update target detection
         HasTarget = attackZone.detectedColliders.Count > 0;
+
         if (playerZone.detectedColliders.Count > 0)
         {
             foreach (var col in playerZone.detectedColliders)
@@ -173,34 +112,64 @@ public class Death : MonoBehaviour
             targetPlayer = null;
         }
 
-        if (AttackCooldown > 0)
-        {
+        if (AttackCooldown > 0f)
             AttackCooldown -= Time.deltaTime;
-        }
 
-        if (specialZone.detectedColliders.Count > 0 && cooldownReady && !HasTarget)
+        // Special Attack
+        if (specialZone.detectedColliders.Count > 0 && CanUseSpecial && !HasTarget)
         {
             animator.SetTrigger(AnimationStrings.specialTrigger);
             lastSpecialTime = Time.time;
         }
     }
 
+    private void FixedUpdate()
+    {
+        bool mustFlip = IsNearCliff || (touchingDirections.IsOnWall && touchingDirections.IsGrounded);
+
+        // PRIORITY: Flip first if needed, even if chasing
+        if (mustFlip)
+        {
+            FlipDirection();
+            rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
+            IsMoving = false;
+            return;
+        }
+
+        if (!damageable.LockVelocity && touchingDirections.IsGrounded && CanMove)
+        {
+            float moveDir = walkDirectionVector.x;
+
+            if (targetPlayer != null)
+            {
+                moveDir = Mathf.Sign(targetPlayer.position.x - transform.position.x);
+                WalkDirection = moveDir > 0 ? WalkableDirection.Right : WalkableDirection.Left;
+            }
+
+            Vector2 velocity = new Vector2(
+                Mathf.Clamp(rb.linearVelocity.x + walkAcceleration * moveDir * Time.fixedDeltaTime, -maxSpeed, maxSpeed),
+                rb.linearVelocity.y
+            );
+
+            rb.linearVelocity = velocity;
+            IsMoving = Mathf.Abs(rb.linearVelocity.x) > 0.1f;
+        }
+        else if (!CanMove)
+        {
+            rb.linearVelocity = new Vector2(Mathf.Lerp(rb.linearVelocity.x, 0, walkStopRate), rb.linearVelocity.y);
+            IsMoving = false;
+        }
+    }
+
     public void PerformSpecialAttack()
     {
-        GameObject special = Instantiate(specialAttackPrefab, specialAttackSpawnPoint.position, transform.rotation);
-        special.transform.localScale = transform.localScale * 2;
+        GameObject special = Instantiate(specialAttackPrefab, specialAttackSpawnPoint.position, Quaternion.identity);
+        special.transform.localScale = new Vector3(transform.localScale.x * 2f, 2f, 1f);
     }
 
     private void FlipDirection()
     {
-        if (WalkDirection == WalkableDirection.Right)
-        {
-            WalkDirection = WalkableDirection.Left;
-        }
-        else if (WalkDirection == WalkableDirection.Left)
-        {
-            WalkDirection = WalkableDirection.Right;
-        }
+        WalkDirection = WalkDirection == WalkableDirection.Right ? WalkableDirection.Left : WalkableDirection.Right;
     }
 
     public void OnHit(int damage, Vector2 knockback)

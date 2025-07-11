@@ -3,17 +3,20 @@ using Assets.Scripts;
 
 public class BasicMonsterAI : MonoBehaviour
 {
+    [Header("Components")]
     protected Rigidbody2D rb;
     protected TouchingDirections touchingDirections;
     protected Animator animator;
     protected Damageable damageable;
 
+    [Header("Movement")]
     public float walkSpeed = 2f;
     public float walkAcceleration = 100f;
     public float maxSpeed = 3f;
     public float walkStopRate = 0.1f;
     public bool isConstantSpeed = false;
 
+    [Header("Detection")]
     public DetectionZone attackZone;
     public DetectionZone cliffZone;
     public DetectionZone playerZone;
@@ -89,29 +92,31 @@ public class BasicMonsterAI : MonoBehaviour
 
     private void FixedUpdate()
     {
-        bool shouldFlip = touchingDirections.IsOnWall && touchingDirections.IsGrounded;
+        bool isTouchingWall = touchingDirections.IsOnWall && touchingDirections.IsGrounded;
         bool isNearCliff = cliffZone != null && cliffZone.detectedColliders.Count == 0;
 
-        if ((shouldFlip || isNearCliff) && targetPlayer == null)
+        // Priority: FLIP at cliff or wall if NOT chasing
+        if ((isTouchingWall || isNearCliff) && targetPlayer == null)
         {
             FlipDirection();
+        }
+
+        // Prevent falling off cliff even if chasing
+        if (isNearCliff)
+        {
+            rb.linearVelocity = new Vector2(0f, rb.linearVelocity.y); // stop moving
+            isMoving = false;
+            return;
         }
 
         if (!damageable.LockVelocity && touchingDirections.IsGrounded && canMove)
         {
             float direction = walkDirectionVector.x;
 
+            // Only chase player if no cliff ahead
             if (targetPlayer != null)
             {
-                if (Mathf.Abs(targetPlayer.position.x - transform.position.x) < 1f)
-                {
-                    direction = 0;
-                }
-                else
-                {
-                    direction = Mathf.Sign(targetPlayer.position.x - transform.position.x);
-                }
-
+                direction = Mathf.Sign(targetPlayer.position.x - transform.position.x);
                 WalkDirection = direction > 0 ? WalkableDirection.Right : WalkableDirection.Left;
             }
 
