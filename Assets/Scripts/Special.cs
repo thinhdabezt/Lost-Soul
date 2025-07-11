@@ -4,6 +4,7 @@ public class Special : MonoBehaviour
 {
     public int damage = 25;
     public float speed = 9f;
+    public float dispawnTime;
     public Vector2 knockback = new Vector2(3f, 1f);
 
     Rigidbody2D rb;
@@ -16,7 +17,7 @@ public class Special : MonoBehaviour
     private void Start()
     {
         rb.linearVelocity = new Vector2(speed * transform.localScale.x, 0);
-        Destroy(gameObject, 10f);
+        Destroy(gameObject, dispawnTime);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

@@ -182,7 +182,7 @@ public class PlayerController : MonoBehaviour
         if (context.started && AttackCooldown <= 0)
         {
             animator.SetTrigger(AnimationStrings.attackTrigger);
-            AttackCooldown = 1.2f; // adjust as needed
+            AttackCooldown = .5f; // adjust as needed
         }
     }
 
@@ -191,7 +191,6 @@ public class PlayerController : MonoBehaviour
         if (context.started && specialAttackCooldown <= 0)
         {
             animator.SetTrigger(AnimationStrings.specialTrigger);
-            //SpawnSpecialAttack();
             specialAttackCooldown = specialAttackCooldownTime;
         }
     }

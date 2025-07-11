@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class Victory : MonoBehaviour
@@ -34,14 +35,14 @@ public class Victory : MonoBehaviour
 
     public void ShowVictoryScreen()
     {
+        PlayerController.Instance.GetComponent<PlayerInput>().enabled = false;
         gameObject.SetActive(true);
     }
 
     public void OpenMainMenu()
     {
-        Time.timeScale = 0f;
         gameObject.SetActive(false);
-        ScoreManager.Instance.scoreText.enabled = false;
+        ScoreManager.Instance.level4Text.enabled = false;
         HealthBar.Instance.healthBarText.enabled = false;
         HealthBar.Instance.healthSlider.gameObject.SetActive(false);
         SceneManager.LoadScene(0);
