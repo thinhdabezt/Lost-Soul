@@ -22,9 +22,9 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private Animator animator;
     private TouchingDirections touchingDirection;
-    private Damageable damageable;
-    private ScoreManager scoreManager;
-    private Firebase firebaseManager;
+    public Damageable damageable;
+    public ScoreManager scoreManager;
+    public Firebase firebaseManager;
 
     private Vector2 moveInput;
     private bool _isMoving = false;
@@ -106,6 +106,13 @@ public class PlayerController : MonoBehaviour
 
     private void LoadDataFromFirebase()
     {
+        if (firebaseManager == null)
+            Debug.LogWarning("firebaseManager is null");
+        if (scoreManager == null)
+            Debug.LogWarning("scoreManager is null");
+        if (damageable == null)
+            Debug.LogWarning("damageable is null");
+
         if (firebaseManager == null || scoreManager == null || damageable == null)
         {
             Debug.LogWarning("Missing manager reference.");
