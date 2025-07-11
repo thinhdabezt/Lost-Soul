@@ -220,6 +220,9 @@ MonoBehaviour:
   specialAttackPrefab: {fileID: 1195125905652199962, guid: b3555ee6a9d1de9439f3773745221519, type: 3}
   specialAttackSpawnPoint: {fileID: 2425585850599585401}
   specialAttackCooldownTime: 4
+  damageable: {fileID: 0}
+  scoreManager: {fileID: 0}
+  firebaseManager: {fileID: 3431153374384308927, guid: 92f70b3ac2d33b24b9a76775aad6181e, type: 3}
 --- !u!114 &7959532356881702259
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -349,6 +352,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: d6684e7e-4a53-4faf-ba51-2350c50cdc16
     m_ActionName: 'Player/Attack[/Mouse/leftButton]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: b2fe3777-67f3-403c-a6d8-50eebe7b4d91
+    m_ActionName: 'Player/Special[/Mouse/rightButton]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
