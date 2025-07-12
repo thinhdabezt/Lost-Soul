@@ -13,7 +13,6 @@ public class UIManager : MonoBehaviour
 
     private void Awake()
     {
-
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
@@ -39,8 +38,11 @@ public class UIManager : MonoBehaviour
     {
         Vector3 spawnPosition = Camera.main.WorldToScreenPoint(character.transform.position);
 
-        TMP_Text tmpText = Instantiate(damageTextPrefab, spawnPosition, Quaternion.identity, canvas.transform).GetComponent<TMP_Text>();
+        // Use FindFirstObjectByType instead of the deprecated FindObjectOfType
+        Canvas sceneCanvas = Object.FindFirstObjectByType<Canvas>();
+        Transform parent = sceneCanvas != null ? sceneCanvas.transform : null;
 
+        TMP_Text tmpText = Instantiate(damageTextPrefab, spawnPosition, Quaternion.identity, parent).GetComponent<TMP_Text>();
         tmpText.text = damageReceived.ToString();
     }
 

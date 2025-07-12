@@ -90,6 +90,8 @@ public class BasicMonsterAI : MonoBehaviour
         animator.SetBool(AnimationStrings.hasTarget, hasTarget);
     }
 
+    public float stopDistance = 1.0f; // Add this to the Movement header for easy tuning
+
     private void FixedUpdate()
     {
         bool isTouchingWall = touchingDirections.IsOnWall && touchingDirections.IsGrounded;
@@ -116,6 +118,16 @@ public class BasicMonsterAI : MonoBehaviour
             // Only chase player if no cliff ahead
             if (targetPlayer != null)
             {
+                float distanceToPlayer = Mathf.Abs(targetPlayer.position.x - transform.position.x);
+
+                if (distanceToPlayer <= stopDistance)
+                {
+                    // Stop near the player
+                    rb.linearVelocity = new Vector2(0f, rb.linearVelocity.y);
+                    isMoving = false;
+                    return;
+                }
+
                 direction = Mathf.Sign(targetPlayer.position.x - transform.position.x);
                 WalkDirection = direction > 0 ? WalkableDirection.Right : WalkableDirection.Left;
             }
@@ -142,6 +154,7 @@ public class BasicMonsterAI : MonoBehaviour
             isMoving = false;
         }
     }
+
 
     public void FlipDirection()
     {

@@ -22,8 +22,9 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private Animator animator;
     private TouchingDirections touchingDirection;
-    public Damageable damageable;
-    public ScoreManager scoreManager;
+    private Damageable damageable;
+    private ScoreManager scoreManager;
+
     public Firebase firebaseManager;
 
     private Vector2 moveInput;
@@ -197,6 +198,7 @@ public class PlayerController : MonoBehaviour
     {
         if (context.started && specialAttackCooldown <= 0)
         {
+            Debug.Log("Special attack triggered");
             animator.SetTrigger(AnimationStrings.specialTrigger);
             specialAttackCooldown = specialAttackCooldownTime;
         }

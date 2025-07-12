@@ -1,4 +1,5 @@
 using Assets.Scripts;
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -32,13 +33,14 @@ public class Damageable : MonoBehaviour
         set
         {
             _health = Mathf.Clamp(value, 0, MaxHealth);
-            healthChanged?.Invoke(_health, MaxHealth); 
+            healthChanged?.Invoke(_health, MaxHealth);
 
             if (_health <= 0)
             {
                 if (damageableType == DamageableType.Player)
                 {
                     OnPlayerDeath?.Invoke();
+                    CharacterEvents.playerDeath?.Invoke();
                 }
                 else if (damageableType == DamageableType.Boss)
                 {

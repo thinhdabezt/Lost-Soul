@@ -19,7 +19,7 @@ public class ScoreManager : MonoBehaviour
     public static ScoreManager Instance;
 
     public int score = 0;
-    public int maxScore;
+    public int maxScore { get; private set; }
 
     public TMP_Text scoreText;
     public TMP_Text maxScoreText;
@@ -45,6 +45,12 @@ public class ScoreManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        UpdateScoreText();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
         string sceneName = SceneManager.GetActiveScene().name;
         foreach (var config in levelConfigs)
         {
@@ -55,12 +61,6 @@ public class ScoreManager : MonoBehaviour
             }
         }
 
-        UpdateScoreText();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
         if (SceneManager.GetActiveScene().name == "Level4")
         {
             scoreText.enabled = false;
@@ -86,6 +86,8 @@ public class ScoreManager : MonoBehaviour
                 StopCoroutine(maxScorePopRoutine);
                 maxScorePopRoutine = null;
             }
+
+            UpdateScoreText();
         }
     }
 
@@ -115,7 +117,7 @@ public class ScoreManager : MonoBehaviour
         UpdateScoreText();
     }
 
-    public IEnumerator PopScore()
+    private IEnumerator PopScore()
     {
         RectTransform rt = scoreText.GetComponent<RectTransform>();
         Vector3 originalScale = rt.localScale;
