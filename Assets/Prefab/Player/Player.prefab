@@ -220,8 +220,6 @@ MonoBehaviour:
   specialAttackPrefab: {fileID: 1195125905652199962, guid: b3555ee6a9d1de9439f3773745221519, type: 3}
   specialAttackSpawnPoint: {fileID: 2425585850599585401}
   specialAttackCooldownTime: 4
-  damageable: {fileID: 0}
-  scoreManager: {fileID: 0}
   firebaseManager: {fileID: 3431153374384308927, guid: 92f70b3ac2d33b24b9a76775aad6181e, type: 3}
 --- !u!114 &7959532356881702259
 MonoBehaviour:
@@ -353,7 +351,19 @@ MonoBehaviour:
     m_ActionId: d6684e7e-4a53-4faf-ba51-2350c50cdc16
     m_ActionName: 'Player/Attack[/Mouse/leftButton]'
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8488100996156711325}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: OnSpecialAttack
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: b2fe3777-67f3-403c-a6d8-50eebe7b4d91
     m_ActionName: 'Player/Special[/Mouse/rightButton]'
   m_NeverAutoSwitchControlSchemes: 0
@@ -424,7 +434,7 @@ MonoBehaviour:
   OnPlayerDeath:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 3822437655443253791, guid: d81200a4146abb641b7abf775053f01c, type: 3}
         m_TargetAssemblyTypeName: GameOver, Assembly-CSharp
         m_MethodName: ShowDeathScreen
         m_Mode: 1
@@ -495,7 +505,7 @@ PolygonCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1878051349486145210}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}

@@ -3,11 +3,22 @@ using UnityEngine.SceneManagement;
 
 public class GameOver : MonoBehaviour
 {
+    public static GameOver Instance;
+
     Damageable playerDamageable;
     Firebase firebaseManager;
+    public GameObject gameOverPanel;
 
     private void Awake()
     {
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        
+        Instance = this;
+
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player != null)
         {
@@ -17,19 +28,13 @@ public class GameOver : MonoBehaviour
         firebaseManager = FindAnyObjectByType<Firebase>();
     }
 
-    private void OnEnable()
+    private void Update()
     {
-        if (playerDamageable != null)
+        if (playerDamageable != null && !playerDamageable.IsAlive && !gameOverPanel.activeSelf)
         {
-            playerDamageable.OnPlayerDeath.AddListener(ShowDeathScreen);
-        }
-    }
-
-    private void OnDisable()
-    {
-        if (playerDamageable != null)
-        {
-            playerDamageable.OnPlayerDeath.RemoveListener(ShowDeathScreen);
+            Debug.Log("Player is dead, showing death screen.");
+            gameOverPanel.SetActive(true);
+            SaveCurrentData();
         }
     }
 
@@ -64,13 +69,13 @@ public class GameOver : MonoBehaviour
 
     public void RestartGame()
     {
-        //gameObject.SetActive(false);
+        gameOverPanel.SetActive(false);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void OpenMainMenu()
     {
-        gameObject.SetActive(false);
+        gameOverPanel.SetActive(false);
         ScoreManager.Instance.scoreText.enabled = false;
         HealthBar.Instance.healthBarText.enabled = false;
         HealthBar.Instance.healthSlider.gameObject.SetActive(false);

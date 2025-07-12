@@ -21,7 +21,7 @@ public class MainMenu : MonoBehaviour
     public GameObject pauseManagerPrefab;
     public GameObject firebaseManagerPrefab;
 
-    private static bool gameSystemsInitialized = false;
+    //private static bool gameSystemsInitialized = false;
 
     // Hàm này được gọi bởi nút "Play"
     public void ShowUsernamePanel()
@@ -49,7 +49,7 @@ public class MainMenu : MonoBehaviour
             Instantiate(canvas);
             Instantiate(uiManagerPrefab);
             Instantiate(pauseManagerPrefab);
-            gameSystemsInitialized = true;
+            //gameSystemsInitialized = true;
 
         // 2. Đợi một frame để các hàm Awake() của đối tượng mới tạo có thời gian chạy
         yield return null;
