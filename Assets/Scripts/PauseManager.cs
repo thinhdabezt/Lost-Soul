@@ -71,7 +71,7 @@ public class PauseManager : MonoBehaviour
         }
 
         string username = PlayerPrefs.GetString("Username", "");
-        int currentHealth = playerController.GetComponent<Damageable>().Health;
+        int currentHealth = 100;
         int currentScore = 0;
         int currentLevel = playerController.CurrentLevel;
 
@@ -84,7 +84,30 @@ public class PauseManager : MonoBehaviour
         });
     }
 
-    private void DestroyDontDestroySingletons()
+    public void ResetSave()
+    {
+        Time.timeScale = 1f;
+        if (firebaseManager == null || playerController == null || scoreManager == null)
+        {
+            SceneManager.LoadScene(0);
+            return;
+        }
+
+        string username = PlayerPrefs.GetString("Username", "");
+        int currentHealth = 100;
+        int currentScore = 0;
+        int currentLevel = 1;
+
+        firebaseManager.SavePlayerData(username, currentHealth, currentLevel, currentScore, () =>
+        {
+            // Destroy các singleton/persistent object
+            DestroyDontDestroySingletons();
+
+            SceneManager.LoadScene(0);
+        });
+    }
+
+    public void DestroyDontDestroySingletons()
     {
         if (PlayerController.Instance != null)
             Destroy(PlayerController.Instance.gameObject);
@@ -110,6 +133,4 @@ public class PauseManager : MonoBehaviour
                 Destroy(canvas.gameObject);
         }
     }
-
-
 }

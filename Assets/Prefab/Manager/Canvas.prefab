@@ -1194,6 +1194,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Score
       objectReference: {fileID: 0}
+    - target: {fileID: 2797287069556802125, guid: 14e84d4a3687c12409d99b1a4ceaff9f, type: 3}
+      propertyPath: m_fontSize
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797287069556802125, guid: 14e84d4a3687c12409d99b1a4ceaff9f, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 5119051479717197953, guid: 14e84d4a3687c12409d99b1a4ceaff9f, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
