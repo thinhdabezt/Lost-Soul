@@ -79,6 +79,7 @@ public class GameOver : MonoBehaviour
         }
 
         gameOverPanel.SetActive(false);
+        // KHÔNG destroy singleton ở đây!
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
@@ -99,11 +100,43 @@ public class GameOver : MonoBehaviour
         }
 
         // Ẩn UI
-        ScoreManager.Instance.scoreText.enabled = false;
-        HealthBar.Instance.healthBarText.enabled = false;
-        HealthBar.Instance.healthSlider.gameObject.SetActive(false);
+        if (ScoreManager.Instance != null)
+            ScoreManager.Instance.scoreText.enabled = false;
+        if (HealthBar.Instance != null)
+        {
+            HealthBar.Instance.healthBarText.enabled = false;
+            HealthBar.Instance.healthSlider.gameObject.SetActive(false);
+        }
+
+        // Destroy các singleton/persistent object
+        DestroyDontDestroySingletons();
 
         SceneManager.LoadScene(0);
+    }
+
+    private void DestroyDontDestroySingletons()
+    {
+        if (PlayerController.Instance != null)
+            Destroy(PlayerController.Instance.gameObject);
+        if (ScoreManager.Instance != null)
+            Destroy(ScoreManager.Instance.gameObject);
+        if (PauseManager.Instance != null)
+            Destroy(PauseManager.Instance.gameObject);
+        if (UIManager.Instance != null)
+            Destroy(UIManager.Instance.gameObject);
+        if (SceneFader.Instance != null)
+            Destroy(SceneFader.Instance.gameObject);
+
+        foreach (var firebase in Object.FindObjectsByType<Firebase>(FindObjectsSortMode.None))
+        {
+            if (firebase.gameObject.scene.name == "DontDestroyOnLoad")
+                Destroy(firebase.gameObject);
+        }
+        foreach (var canvas in Object.FindObjectsByType<Canvas>(FindObjectsSortMode.None))
+        {
+            if (canvas.gameObject.scene.name == "DontDestroyOnLoad")
+                Destroy(canvas.gameObject);
+        }
     }
 
 }
