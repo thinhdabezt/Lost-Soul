@@ -72,7 +72,7 @@ public class PauseManager : MonoBehaviour
 
         string username = PlayerPrefs.GetString("Username", "");
         int currentHealth = playerController.GetComponent<Damageable>().Health;
-        int currentScore = scoreManager.score;
+        int currentScore = 0;
         int currentLevel = playerController.CurrentLevel;
 
         firebaseManager.SavePlayerData(username, currentHealth, currentLevel, currentScore, () =>
@@ -86,7 +86,6 @@ public class PauseManager : MonoBehaviour
 
     private void DestroyDontDestroySingletons()
     {
-        // Destroy các singleton nếu còn tồn tại
         if (PlayerController.Instance != null)
             Destroy(PlayerController.Instance.gameObject);
         if (ScoreManager.Instance != null)
@@ -97,10 +96,20 @@ public class PauseManager : MonoBehaviour
             Destroy(UIManager.Instance.gameObject);
         if (SceneFader.Instance != null)
             Destroy(SceneFader.Instance.gameObject);
-        // Thêm các object khác nếu cần
-        // Nếu có FirebaseManager singleton, destroy luôn nếu cần
-        var firebase = FindAnyObjectByType<Firebase>();
-        if (firebase != null)
-            Destroy(firebase.gameObject);
+        if (GameOver.Instance != null)
+            Destroy(GameOver.Instance.gameObject);
+
+        foreach (var firebase in FindObjectsByType<Firebase>(FindObjectsSortMode.None))
+        {
+            if (firebase.gameObject.scene.name == "DontDestroyOnLoad")
+                Destroy(firebase.gameObject);
+        }
+        foreach (var canvas in FindObjectsByType<Canvas>(FindObjectsSortMode.None))
+        {
+            if (canvas.gameObject.scene.name == "DontDestroyOnLoad")
+                Destroy(canvas.gameObject);
+        }
     }
+
+
 }

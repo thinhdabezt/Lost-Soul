@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour
     private bool _isMoving = false;
     private bool _isRunning = false;
     private bool _isFacingRight = true;
-
+    public static bool IsLoadingFromMainMenu = false;
     public bool CanMove => animator.GetBool(AnimationStrings.canMove);
     public bool IsAlive => animator.GetBool(AnimationStrings.isAlive);
     public float AttackCooldown
@@ -102,7 +102,29 @@ public class PlayerController : MonoBehaviour
     {
         firebaseManager = FindAnyObjectByType<Firebase>();
         scoreManager = ScoreManager.Instance;
-        LoadDataFromFirebase();
+
+        if (scene.name.StartsWith("Level"))
+        {
+            if (int.TryParse(scene.name.Replace("Level", ""), out int level))
+                CurrentLevel = level;
+            else
+                CurrentLevel = 1;
+        }
+        else
+        {
+            CurrentLevel = 1;
+        }
+
+        if (IsLoadingFromMainMenu)
+        {
+            LoadDataFromFirebase();
+            IsLoadingFromMainMenu = false;
+        }
+        else if (scene.name.StartsWith("Level"))
+        {
+            damageable.Initialize(100);
+            scoreManager.SetScore(0);
+        }
     }
 
     private void LoadDataFromFirebase()
@@ -127,18 +149,18 @@ public class PlayerController : MonoBehaviour
         {
             if (data == null)
             {
-                Debug.Log("New player - using defaults.");
                 damageable.Initialize(100);
                 scoreManager.SetScore(0);
-                CurrentLevel = 1;
+                // Không set CurrentLevel ở đây, đã set ở OnSceneLoaded
             }
             else
             {
                 damageable.Initialize(data.health);
                 scoreManager.SetScore(data.score);
-                CurrentLevel = data.level;
+                // Không set CurrentLevel ở đây, đã set ở OnSceneLoaded
             }
         });
+
     }
 
     private void Update()

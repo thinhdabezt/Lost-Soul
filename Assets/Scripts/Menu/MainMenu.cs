@@ -17,6 +17,7 @@ public class MainMenu : MonoBehaviour
     [Header("Prefabs To Instantiate")]
     public GameObject playerPrefab;
     public GameObject uiManagerPrefab;
+    public GameObject scoreManagerPrefab;
     public GameObject canvas;
     public GameObject pauseManagerPrefab;
     public GameObject firebaseManagerPrefab;
@@ -47,7 +48,8 @@ public class MainMenu : MonoBehaviour
             Instantiate(firebaseManagerPrefab);
             Instantiate(playerPrefab);
             Instantiate(canvas);
-            Instantiate(uiManagerPrefab);
+            Instantiate(scoreManagerPrefab);
+        Instantiate(uiManagerPrefab);
             Instantiate(pauseManagerPrefab);
             //gameSystemsInitialized = true;
 
@@ -62,6 +64,7 @@ public class MainMenu : MonoBehaviour
             {
                 // Người chơi mới: Lưu dữ liệu mặc định rồi vào Level 1
                 firebase.SavePlayerData(username, 100, 1, 0, () => {
+                    PlayerController.IsLoadingFromMainMenu = true;
                     SceneManager.LoadScene("Level1");
                 });
             }
@@ -69,9 +72,11 @@ public class MainMenu : MonoBehaviour
             {
                 // Người chơi cũ: Vào thẳng level đã lưu
                 string sceneToLoad = "Level" + loadedData.level;
+                PlayerController.IsLoadingFromMainMenu = true;
                 SceneManager.LoadScene(sceneToLoad);
             }
         });
+
     }
     // Các hàm khác không thay đổi
     public void BackToMainMenu() { usernamePanel.SetActive(false); mainMenuPanel.SetActive(true); }

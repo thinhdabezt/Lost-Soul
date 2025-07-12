@@ -46,39 +46,97 @@ public class GameOver : MonoBehaviour
 
     private void SaveCurrentData()
     {
-        if (firebaseManager == null || playerDamageable == null)
+        if (firebaseManager == null)
         {
-            Debug.LogError("Không thể lưu dữ liệu: Thiếu FirebaseManager hoặc PlayerDamageable!");
+            Debug.LogError("Không thể lưu dữ liệu: Thiếu FirebaseManager!");
             return;
         }
 
-        // Lấy thông tin cần lưu
         string username = PlayerPrefs.GetString("Username", "");
-
-        // LẤY CÁC GIÁ TRỊ HIỆN TẠI
-        int currentHealth = playerDamageable.Health; // Tại thời điểm chết, giá trị này sẽ là 0
-        int currentLevel = PlayerController.Instance.CurrentLevel; // Lấy level từ PlayerController
-        int finalScore = ScoreManager.Instance.score;
+        int currentLevel = PlayerController.Instance.CurrentLevel;
 
         if (!string.IsNullOrEmpty(username))
         {
-            Debug.Log($"Đang lưu dữ liệu cho {username}: Máu={currentHealth}, Level={currentLevel}, Điểm={finalScore}");
-            firebaseManager.SavePlayerData(username, currentHealth, currentLevel, finalScore);
+            Debug.Log($"Đang lưu dữ liệu cho {username}: Level={currentLevel}");
+            // Lưu máu = 100, điểm = 0 (hoặc giữ nguyên nếu muốn)
+            firebaseManager.SavePlayerData(username, 100, currentLevel, 0);
         }
     }
 
+
     public void RestartGame()
     {
+        // Reset máu và điểm trước khi restart
+        if (PlayerController.Instance != null)
+        {
+            var damageable = PlayerController.Instance.GetComponent<Damageable>();
+            if (damageable != null)
+                damageable.Initialize(100);
+        }
+        if (ScoreManager.Instance != null)
+        {
+            ScoreManager.Instance.SetScore(0);
+        }
+
         gameOverPanel.SetActive(false);
+        // KHÔNG destroy singleton ở đây!
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void OpenMainMenu()
     {
         gameOverPanel.SetActive(false);
-        ScoreManager.Instance.scoreText.enabled = false;
-        HealthBar.Instance.healthBarText.enabled = false;
-        HealthBar.Instance.healthSlider.gameObject.SetActive(false);
+
+        // Reset máu và điểm về mặc định
+        if (PlayerController.Instance != null)
+        {
+            var damageable = PlayerController.Instance.GetComponent<Damageable>();
+            if (damageable != null)
+                damageable.Initialize(100);
+        }
+        if (ScoreManager.Instance != null)
+        {
+            ScoreManager.Instance.SetScore(0);
+        }
+
+        // Ẩn UI
+        if (ScoreManager.Instance != null)
+            ScoreManager.Instance.scoreText.enabled = false;
+        if (HealthBar.Instance != null)
+        {
+            HealthBar.Instance.healthBarText.enabled = false;
+            HealthBar.Instance.healthSlider.gameObject.SetActive(false);
+        }
+
+        // Destroy các singleton/persistent object
+        DestroyDontDestroySingletons();
+
         SceneManager.LoadScene(0);
     }
+
+    private void DestroyDontDestroySingletons()
+    {
+        if (PlayerController.Instance != null)
+            Destroy(PlayerController.Instance.gameObject);
+        if (ScoreManager.Instance != null)
+            Destroy(ScoreManager.Instance.gameObject);
+        if (PauseManager.Instance != null)
+            Destroy(PauseManager.Instance.gameObject);
+        if (UIManager.Instance != null)
+            Destroy(UIManager.Instance.gameObject);
+        if (SceneFader.Instance != null)
+            Destroy(SceneFader.Instance.gameObject);
+
+        foreach (var firebase in Object.FindObjectsByType<Firebase>(FindObjectsSortMode.None))
+        {
+            if (firebase.gameObject.scene.name == "DontDestroyOnLoad")
+                Destroy(firebase.gameObject);
+        }
+        foreach (var canvas in Object.FindObjectsByType<Canvas>(FindObjectsSortMode.None))
+        {
+            if (canvas.gameObject.scene.name == "DontDestroyOnLoad")
+                Destroy(canvas.gameObject);
+        }
+    }
+
 }
