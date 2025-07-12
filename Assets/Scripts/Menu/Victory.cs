@@ -41,6 +41,7 @@ public class Victory : MonoBehaviour
 
     public void OpenMainMenu()
     {
+        PauseManager.Instance.ResetSave();
         gameObject.SetActive(false);
         ScoreManager.Instance.level4Text.enabled = false;
         HealthBar.Instance.healthBarText.enabled = false;
