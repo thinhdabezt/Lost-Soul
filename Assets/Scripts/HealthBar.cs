@@ -9,11 +9,12 @@ public class HealthBar : MonoBehaviour
     public TMP_Text healthBarText;
     public Slider healthSlider;
 
+    GameObject player;
     Damageable playerDamageable;
 
     private void Awake()
     {
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        player = GameObject.FindGameObjectWithTag("Player");
         playerDamageable = player.GetComponent<Damageable>();
     }
 
@@ -29,8 +30,22 @@ public class HealthBar : MonoBehaviour
             Destroy(gameObject);
         }
 
-        healthSlider.value = playerDamageable.Health / (float)playerDamageable.MaxHealth;
-        healthBarText.text = "HP: " + playerDamageable.Health + "/" + playerDamageable.MaxHealth;
+        SetHealthBar();
+    }
+
+    private void Update()
+    {
+        player = GameObject.FindGameObjectWithTag("Player");
+
+        if (player != null)
+        {
+            playerDamageable = player.GetComponent<Damageable>();
+        }
+
+        if (playerDamageable != null && playerDamageable.IsAlive)
+        {
+            SetHealthBar();
+        }
     }
 
     void OnEnable()
@@ -42,7 +57,11 @@ public class HealthBar : MonoBehaviour
     {
         playerDamageable.healthChanged.RemoveListener(OnPlayerHealthChanged); 
     }
-
+    public void SetHealthBar()
+    {
+        healthSlider.value = playerDamageable.Health / (float)playerDamageable.MaxHealth;
+        healthBarText.text = "HP: " + playerDamageable.Health + "/" + playerDamageable.MaxHealth;
+    }
     public void OnPlayerHealthChanged(int health, int maxHealth)
     {
         healthSlider.value = health / (float)maxHealth;

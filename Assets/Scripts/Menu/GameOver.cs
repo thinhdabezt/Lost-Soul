@@ -5,9 +5,11 @@ public class GameOver : MonoBehaviour
 {
     public static GameOver Instance;
 
+    private GameObject player;
     Damageable playerDamageable;
     Firebase firebaseManager;
     public GameObject gameOverPanel;
+    public GameObject playerPrefab;
 
     private void Awake()
     {
@@ -19,17 +21,22 @@ public class GameOver : MonoBehaviour
         
         Instance = this;
 
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        firebaseManager = FindAnyObjectByType<Firebase>();
+    }
+
+    private void Start()
+    {
+        gameOverPanel.SetActive(false);
+    }
+
+    private void Update()
+    {
+        player = GameObject.FindGameObjectWithTag("Player");
         if (player != null)
         {
             playerDamageable = player.GetComponent<Damageable>();
         }
 
-        firebaseManager = FindAnyObjectByType<Firebase>();
-    }
-
-    private void Update()
-    {
         if (playerDamageable != null && !playerDamageable.IsAlive && !gameOverPanel.activeSelf)
         {
             Debug.Log("Player is dead, showing death screen.");
@@ -73,11 +80,18 @@ public class GameOver : MonoBehaviour
             if (damageable != null)
                 damageable.Initialize(100);
         }
+        if (playerPrefab != null)
+        {
+            Instantiate(playerPrefab);
+        }
         if (ScoreManager.Instance != null)
         {
-            ScoreManager.Instance.SetScore(0);
+            ScoreManager.Instance.ResetScore();
         }
-
+        if (HealthBar.Instance != null)
+        {
+            HealthBar.Instance.SetHealthBar();
+        }
         gameOverPanel.SetActive(false);
         // KHÔNG destroy singleton ở đây!
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);

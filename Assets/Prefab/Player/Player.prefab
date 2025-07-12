@@ -434,7 +434,7 @@ MonoBehaviour:
   OnPlayerDeath:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3822437655443253791, guid: d81200a4146abb641b7abf775053f01c, type: 3}
+      - m_Target: {fileID: 7967221037725279792, guid: d81200a4146abb641b7abf775053f01c, type: 3}
         m_TargetAssemblyTypeName: GameOver, Assembly-CSharp
         m_MethodName: ShowDeathScreen
         m_Mode: 1

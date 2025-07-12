@@ -427,11 +427,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hit:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8995232156414661358}
+        m_TargetAssemblyTypeName: BasicMonsterAI, Assembly-CSharp
+        m_MethodName: OnHit
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   healthChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  OnPlayerDeath:
     m_PersistentCalls:
       m_Calls: []
   OnBossDeath:
@@ -439,8 +448,8 @@ MonoBehaviour:
       m_Calls: []
   damageableType: 1
   invincibleTime: 0.25
-  _maxHealth: 100
-  _health: 100
+  _maxHealth: 40
+  _health: 40
 --- !u!114 &8995232156414661358
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -464,6 +473,7 @@ MonoBehaviour:
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 256
+  stopDistance: 1
 --- !u!114 &3523510854066771138
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -667,5 +677,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 539612f6bd6fc2e4c84f22fc75671911, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDamage: 25
+  attackDamage: 10
   knockback: {x: 0, y: 0}

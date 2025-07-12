@@ -7,7 +7,6 @@ public class Damageable : MonoBehaviour
 {
     public UnityEvent<int, Vector2> hit;
     public UnityEvent<int, int> healthChanged;
-    public UnityEvent OnPlayerDeath;
     public UnityEvent OnBossDeath;
 
     public enum DamageableType { Player, Enemy, Boss }
@@ -37,12 +36,7 @@ public class Damageable : MonoBehaviour
 
             if (_health <= 0)
             {
-                if (damageableType == DamageableType.Player)
-                {
-                    OnPlayerDeath?.Invoke();
-                    CharacterEvents.playerDeath?.Invoke();
-                }
-                else if (damageableType == DamageableType.Boss)
+                if (damageableType == DamageableType.Boss)
                 {
                     OnBossDeath?.Invoke();
                 }
@@ -72,6 +66,14 @@ public class Damageable : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         Health = MaxHealth;
+    }
+
+    private void Start()
+    {
+        if(damageableType == DamageableType.Player)
+        {
+            Initialize(100);
+        }
     }
 
     void Update()

@@ -1,7 +1,7 @@
 using UnityEngine;
 using Assets.Scripts;
 
-public class BasicMonsterAI : MonoBehaviour
+public class BasicMonster : MonoBehaviour
 {
     [Header("Components")]
     protected Rigidbody2D rb;

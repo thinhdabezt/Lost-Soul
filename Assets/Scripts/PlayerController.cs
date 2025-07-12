@@ -220,7 +220,6 @@ public class PlayerController : MonoBehaviour
     {
         if (context.started && specialAttackCooldown <= 0)
         {
-            Debug.Log("Special attack triggered");
             animator.SetTrigger(AnimationStrings.specialTrigger);
             specialAttackCooldown = specialAttackCooldownTime;
         }
