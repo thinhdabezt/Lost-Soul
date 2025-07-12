@@ -287,6 +287,7 @@ MonoBehaviour:
   confirmStartButton: {fileID: 734312575}
   playerPrefab: {fileID: 1415133629894060215, guid: dafa46a2fab012f4eb75b66179d917b4, type: 3}
   uiManagerPrefab: {fileID: 1510705174378769041, guid: cb69a4adeb5f59a409e2adcd0e608f13, type: 3}
+  scoreManagerPrefab: {fileID: 284457619117675461, guid: 14e84d4a3687c12409d99b1a4ceaff9f, type: 3}
   canvas: {fileID: 5095172436262289659, guid: db6d3de85c247ed4a8391c0a19f922b3, type: 3}
   pauseManagerPrefab: {fileID: 5557191642747029802, guid: a69c1e57a51928d43b2440d12bcba26f, type: 3}
   firebaseManagerPrefab: {fileID: 7540924160757905331, guid: 92f70b3ac2d33b24b9a76775aad6181e, type: 3}
@@ -498,6 +499,7 @@ MonoBehaviour:
   confirmStartButton: {fileID: 734312575}
   playerPrefab: {fileID: 1415133629894060215, guid: dafa46a2fab012f4eb75b66179d917b4, type: 3}
   uiManagerPrefab: {fileID: 1510705174378769041, guid: cb69a4adeb5f59a409e2adcd0e608f13, type: 3}
+  scoreManagerPrefab: {fileID: 284457619117675461, guid: 14e84d4a3687c12409d99b1a4ceaff9f, type: 3}
   canvas: {fileID: 5095172436262289659, guid: db6d3de85c247ed4a8391c0a19f922b3, type: 3}
   pauseManagerPrefab: {fileID: 5557191642747029802, guid: a69c1e57a51928d43b2440d12bcba26f, type: 3}
   firebaseManagerPrefab: {fileID: 7540924160757905331, guid: 92f70b3ac2d33b24b9a76775aad6181e, type: 3}
@@ -1548,63 +1550,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 970805974}
   m_CullTransparentMesh: 1
---- !u!1001 &1035006281
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 78387999788930350, guid: 92f70b3ac2d33b24b9a76775aad6181e, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 78387999788930350, guid: 92f70b3ac2d33b24b9a76775aad6181e, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 78387999788930350, guid: 92f70b3ac2d33b24b9a76775aad6181e, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 78387999788930350, guid: 92f70b3ac2d33b24b9a76775aad6181e, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 78387999788930350, guid: 92f70b3ac2d33b24b9a76775aad6181e, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 78387999788930350, guid: 92f70b3ac2d33b24b9a76775aad6181e, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 78387999788930350, guid: 92f70b3ac2d33b24b9a76775aad6181e, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 78387999788930350, guid: 92f70b3ac2d33b24b9a76775aad6181e, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 78387999788930350, guid: 92f70b3ac2d33b24b9a76775aad6181e, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 78387999788930350, guid: 92f70b3ac2d33b24b9a76775aad6181e, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7540924160757905331, guid: 92f70b3ac2d33b24b9a76775aad6181e, type: 3}
-      propertyPath: m_Name
-      value: Firebase
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 92f70b3ac2d33b24b9a76775aad6181e, type: 3}
 --- !u!1 &1041462668
 GameObject:
   m_ObjectHideFlags: 0
@@ -2774,4 +2719,3 @@ SceneRoots:
   - {fileID: 800008385}
   - {fileID: 52852107}
   - {fileID: 1779475293}
-  - {fileID: 1035006281}
