@@ -22,8 +22,6 @@ public class MainMenu : MonoBehaviour
     public GameObject pauseManagerPrefab;
     public GameObject firebaseManagerPrefab;
 
-    //private static bool gameSystemsInitialized = false;
-
     // Hàm này được gọi bởi nút "Play"
     public void ShowUsernamePanel()
     {
@@ -44,14 +42,13 @@ public class MainMenu : MonoBehaviour
 
     private IEnumerator InitializeSystemsAndLoadGame(string username)
     {
-            Debug.Log("Initializing persistent systems for the first time...");
-            Instantiate(firebaseManagerPrefab);
-            Instantiate(playerPrefab);
-            Instantiate(canvas);
-            Instantiate(scoreManagerPrefab);
+        Debug.Log("Initializing persistent systems for the first time...");
+        Instantiate(firebaseManagerPrefab);
+        Instantiate(playerPrefab);
+        Instantiate(canvas);
+        Instantiate(scoreManagerPrefab);
         Instantiate(uiManagerPrefab);
-            Instantiate(pauseManagerPrefab);
-            //gameSystemsInitialized = true;
+        Instantiate(pauseManagerPrefab);
 
         // 2. Đợi một frame để các hàm Awake() của đối tượng mới tạo có thời gian chạy
         yield return null;

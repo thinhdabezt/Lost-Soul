@@ -1106,6 +1106,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameOverPanel: {fileID: 7445057256730740329}
+  playerPrefab: {fileID: 1415133629894060215, guid: dafa46a2fab012f4eb75b66179d917b4, type: 3}
 --- !u!1 &9121260448465802055
 GameObject:
   m_ObjectHideFlags: 0

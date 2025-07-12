@@ -193,16 +193,13 @@ MonoBehaviour:
   healthChanged:
     m_PersistentCalls:
       m_Calls: []
-  OnPlayerDeath:
-    m_PersistentCalls:
-      m_Calls: []
   OnBossDeath:
     m_PersistentCalls:
       m_Calls: []
   damageableType: 0
   invincibleTime: 0.25
-  _maxHealth: 80
-  _health: 80
+  _maxHealth: 60
+  _health: 60
 --- !u!111 &854746897506102339
 Animation:
   m_ObjectHideFlags: 0
@@ -307,6 +304,7 @@ MonoBehaviour:
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 256
+  stopDistance: 1
 --- !u!1 &4184113718773907335
 GameObject:
   m_ObjectHideFlags: 0
@@ -687,5 +685,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 539612f6bd6fc2e4c84f22fc75671911, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDamage: 25
-  knockback: {x: 0, y: 0}
+  attackDamage: 20
+  knockback: {x: 2, y: 0}

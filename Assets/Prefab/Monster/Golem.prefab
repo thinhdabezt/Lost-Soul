@@ -216,8 +216,8 @@ MonoBehaviour:
   hit:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Goblin, Assembly-CSharp
+      - m_Target: {fileID: 7625982934980602421}
+        m_TargetAssemblyTypeName: BasicMonsterAI, Assembly-CSharp
         m_MethodName: OnHit
         m_Mode: 0
         m_Arguments:
@@ -231,7 +231,7 @@ MonoBehaviour:
   healthChanged:
     m_PersistentCalls:
       m_Calls: []
-  OnPlayerDeath:
+  OnBossDeath:
     m_PersistentCalls:
       m_Calls: []
   damageableType: 1
@@ -304,6 +304,7 @@ MonoBehaviour:
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 256
+  stopDistance: 1
 --- !u!1 &2205995514046385508
 GameObject:
   m_ObjectHideFlags: 0
@@ -349,8 +350,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 539612f6bd6fc2e4c84f22fc75671911, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDamage: 25
-  knockback: {x: 0, y: 0}
+  attackDamage: 15
+  knockback: {x: 3, y: 0}
 --- !u!60 &4741343500377770925
 PolygonCollider2D:
   m_ObjectHideFlags: 0
