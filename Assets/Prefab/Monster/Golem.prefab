@@ -350,7 +350,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 539612f6bd6fc2e4c84f22fc75671911, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDamage: 15
+  attackDamage: 10
   knockback: {x: 3, y: 0}
 --- !u!60 &4741343500377770925
 PolygonCollider2D:
