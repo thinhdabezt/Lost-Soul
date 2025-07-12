@@ -7,11 +7,17 @@ public class Gate : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            if(ScoreManager.Instance.score < ScoreManager.Instance.maxScore)
+            if (ScoreManager.Instance == null)
+            {
+                Debug.LogError("ScoreManager.Instance is null!");
+                return;
+            }
+
+            if (ScoreManager.Instance.score < ScoreManager.Instance.maxScore)
             {
                 UIManager.Instance.ShowPopupMessage(collision.gameObject, "Collect all coin to proceed!!!");
             }
-            else if (ScoreManager.Instance.score >= ScoreManager.Instance.maxScore)
+            else
             {
                 SceneFader.Instance.FadeToScene(SceneManager.GetActiveScene().buildIndex + 1);
             }

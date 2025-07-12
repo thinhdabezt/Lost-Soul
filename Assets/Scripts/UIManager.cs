@@ -37,30 +37,33 @@ public class UIManager : MonoBehaviour
     public void TookDamage(GameObject character, int damageReceived)
     {
         Vector3 spawnPosition = Camera.main.WorldToScreenPoint(character.transform.position);
-
-        // Use FindFirstObjectByType instead of the deprecated FindObjectOfType
+        GameObject go = Instantiate(damageTextPrefab, spawnPosition, Quaternion.identity);
         Canvas sceneCanvas = Object.FindFirstObjectByType<Canvas>();
-        Transform parent = sceneCanvas != null ? sceneCanvas.transform : null;
-
-        TMP_Text tmpText = Instantiate(damageTextPrefab, spawnPosition, Quaternion.identity, parent).GetComponent<TMP_Text>();
+        if (sceneCanvas != null)
+            go.transform.SetParent(sceneCanvas.transform, false);
+        TMP_Text tmpText = go.GetComponent<TMP_Text>();
         tmpText.text = damageReceived.ToString();
     }
 
     public void Healed(GameObject character, int healthRestored)
     {
         Vector3 spawnPosition = Camera.main.WorldToScreenPoint(character.transform.position);
-
-        TMP_Text tmpText = Instantiate(healthTextPrefab, spawnPosition, Quaternion.identity, canvas.transform).GetComponent<TMP_Text>();
-
+        GameObject go = Instantiate(healthTextPrefab, spawnPosition, Quaternion.identity);
+        Canvas sceneCanvas = Object.FindFirstObjectByType<Canvas>();
+        if (sceneCanvas != null)
+            go.transform.SetParent(sceneCanvas.transform, false);
+        TMP_Text tmpText = go.GetComponent<TMP_Text>();
         tmpText.text = healthRestored.ToString();
     }
 
     public void ShowPopupMessage(GameObject character, string message)
     {
         Vector3 spawnPosition = Camera.main.WorldToScreenPoint(character.transform.position);
-
-        TMP_Text tmpText = Instantiate(messageTextPrefab, spawnPosition, Quaternion.identity, canvas.transform).GetComponent<TMP_Text>();
-
+        GameObject go = Instantiate(messageTextPrefab, spawnPosition, Quaternion.identity);
+        Canvas sceneCanvas = Object.FindFirstObjectByType<Canvas>();
+        if (sceneCanvas != null)
+            go.transform.SetParent(sceneCanvas.transform, false);
+        TMP_Text tmpText = go.GetComponent<TMP_Text>();
         tmpText.text = message;
     }
 }
