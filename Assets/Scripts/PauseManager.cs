@@ -72,7 +72,7 @@ public class PauseManager : MonoBehaviour
 
         string username = PlayerPrefs.GetString("Username", "");
         int currentHealth = playerController.GetComponent<Damageable>().Health;
-        int currentScore = scoreManager.score;
+        int currentScore = 0;
         int currentLevel = playerController.CurrentLevel;
 
         firebaseManager.SavePlayerData(username, currentHealth, currentLevel, currentScore, () =>
