@@ -448,8 +448,8 @@ MonoBehaviour:
       m_Calls: []
   damageableType: 1
   invincibleTime: 0.25
-  _maxHealth: 40
-  _health: 40
+  _maxHealth: 30
+  _health: 30
 --- !u!114 &8995232156414661358
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -677,5 +677,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 539612f6bd6fc2e4c84f22fc75671911, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDamage: 10
+  attackDamage: 8
   knockback: {x: 0, y: 0}

@@ -5,7 +5,7 @@ public class HealthPickup : MonoBehaviour
 {
     public int healthAmount = 20;
     public Vector3 spinRotationSpeed = new Vector3(0, 180, 0);
-
+    
     // Update is called once per frame
     void Update()
     {
@@ -22,6 +22,7 @@ public class HealthPickup : MonoBehaviour
             if (wasHealed)
             {
                 Destroy(gameObject);
+                AudioManager.Instance.PlayHealSFX();
             }
         }
     }

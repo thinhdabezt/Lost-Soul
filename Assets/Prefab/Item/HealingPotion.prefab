@@ -101,7 +101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88b13b1fa52f1eb4d8470fc0493be5a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthAmount: 20
+  healthAmount: 30
   spinRotationSpeed: {x: 0, y: 180, z: 0}
 --- !u!70 &4253455636499379075
 CapsuleCollider2D:

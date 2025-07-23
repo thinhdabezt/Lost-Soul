@@ -375,7 +375,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 539612f6bd6fc2e4c84f22fc75671911, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDamage: 10
+  attackDamage: 8
   knockback: {x: 2, y: 0}
 --- !u!1 &9071039995234001989
 GameObject:
@@ -613,8 +613,8 @@ MonoBehaviour:
       m_Calls: []
   damageableType: 0
   invincibleTime: 0.25
-  _maxHealth: 120
-  _health: 120
+  _maxHealth: 40
+  _health: 40
 --- !u!114 &6413857818440623470
 MonoBehaviour:
   m_ObjectHideFlags: 0
