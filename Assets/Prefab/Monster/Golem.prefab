@@ -236,8 +236,8 @@ MonoBehaviour:
       m_Calls: []
   damageableType: 1
   invincibleTime: 0.25
-  _maxHealth: 100
-  _health: 100
+  _maxHealth: 50
+  _health: 50
 --- !u!114 &2801326146761612903
 MonoBehaviour:
   m_ObjectHideFlags: 0

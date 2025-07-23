@@ -26,6 +26,7 @@ public class Special : MonoBehaviour
         Vector2 deliveredKnockback = transform.localScale.x > 0 ? knockback : new Vector2(-knockback.x, knockback.y);
         if (damageable != null && damageable.IsAlive)
         {
+            AudioManager.Instance.PlaySpecialHitSFX();
             damageable.TakeDamage(damage, deliveredKnockback);
             Destroy(gameObject);
         }

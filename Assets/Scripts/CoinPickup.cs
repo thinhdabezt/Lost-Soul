@@ -3,7 +3,6 @@ using UnityEngine;
 public class CoinPickup : MonoBehaviour
 {
     public Vector3 spinRotationSpeed = new Vector3(0, 180, 0);
-
     [SerializeField] private int coinValue = 1;
 
     // Update is called once per frame
@@ -15,6 +14,7 @@ public class CoinPickup : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         ScoreManager.Instance.AddScore(coinValue);
+        AudioManager.Instance.PlayCoinSFX();
         Destroy(gameObject);
     }
 }

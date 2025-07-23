@@ -381,8 +381,8 @@ MonoBehaviour:
         m_CallState: 2
   damageableType: 2
   invincibleTime: 0.25
-  _maxHealth: 150
-  _health: 150
+  _maxHealth: 75
+  _health: 75
 --- !u!114 &49722061
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9666,7 +9666,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 539612f6bd6fc2e4c84f22fc75671911, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDamage: 20
+  attackDamage: 15
   knockback: {x: 0, y: 0}
 --- !u!60 &1194245946
 PolygonCollider2D:

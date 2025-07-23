@@ -431,13 +431,13 @@ MonoBehaviour:
   healthChanged:
     m_PersistentCalls:
       m_Calls: []
-  OnPlayerDeath:
+  OnBossDeath:
     m_PersistentCalls:
       m_Calls: []
   damageableType: 0
   invincibleTime: 0.25
-  _maxHealth: 60
-  _health: 60
+  _maxHealth: 40
+  _health: 40
 --- !u!114 &3171585245904349321
 MonoBehaviour:
   m_ObjectHideFlags: 0
