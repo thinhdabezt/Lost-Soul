@@ -3,7 +3,9 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 3
-  tags: []
+  tags:
+  - SpawnPoint
+  - Boss
   layers:
   - Default
   - TransparentFX
@@ -13,12 +15,12 @@ TagManager:
   - UI
   - Tilemap
   - TilemapNoCollision
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Player
+  - PlayerHitbox
+  - Enemy
+  - EnemyHitbox
+  - Pickup
+  - GroundDetection
   - 
   - 
   - 
@@ -41,8 +43,14 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Decoration
+    uniqueID: 1169442409
+    locked: 0
   - name: Monster
     uniqueID: 3978241723
+    locked: 0
+  - name: Item
+    uniqueID: 1605302671
     locked: 0
   - name: Player
     uniqueID: 4287101047
